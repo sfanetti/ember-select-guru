@@ -14,8 +14,25 @@ export default Component.extend({
   hasOptions: computed.notEmpty('options'),
   queryTermObserver: observer('queryTerm', function() {
     Ember.run.once(() => {
+      this.setProperties({
+        isPending: false,
+        hasFailed: false
+      });
       const result = this.attrs.onSearchInputChange(this.get('queryTerm'));
-      console.log(result);
+      // handle if result is a promise
+      if('function' === typeof result.then) {
+        this.set('isPending', true);
+        result.then(() => {
+          this.set('isPending', false);
+        }, () => {
+          this.set('hasFailed', true);
+        });
+      // handle if result is an array (external search)
+      } else if(Array.isArray(result)) {
+      // handle if result is undefined (internal search)
+      } else {
+        // TODO - perform internal search
+      }
     });
   }),
   didReceiveAttrs() {
