@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { _ } = window;
+
 const { Component, computed, observer } = Ember;
 
 export default Component.extend({
@@ -29,6 +31,8 @@ export default Component.extend({
         });
       // handle if result is an array (external search)
       } else if(Array.isArray(result)) {
+        const options = _.intersection(result, this.get('options'));
+        this.set('_options', options);
       // handle if result is undefined (internal search)
       } else {
         // TODO - perform internal search
