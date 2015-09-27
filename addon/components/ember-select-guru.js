@@ -18,6 +18,9 @@ export default Component.extend({
       console.log(result);
     });
   }),
+  didReceiveAttrs() {
+    this.set('_options', this.get('attrs.options'));
+  },
   actions: {
     onOptionClick(option) {}
   }
