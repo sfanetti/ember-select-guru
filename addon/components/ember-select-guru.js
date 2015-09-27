@@ -22,7 +22,9 @@ export default Component.extend({
       });
       const result = this.attrs.onSearchInputChange(this.get('queryTerm'));
       // handle if result is a promise
-      if('function' === typeof result.then) {
+      if(result === undefined || result === null) {
+        // TODO - perform internal search
+      } else if('function' === typeof result.then) {
         this.set('isPending', true);
         result.then(() => {
           this.set('isPending', false);
@@ -34,8 +36,6 @@ export default Component.extend({
         const options = _.intersection(result, this.get('options'));
         this.set('_options', options);
       // handle if result is undefined (internal search)
-      } else {
-        // TODO - perform internal search
       }
     });
   }),
