@@ -1,3 +1,16 @@
 <h2 id="title">ember-select-guru</h2>
 
-{{ember-select-guru options=options onSearchInputChange=(action "queryTermChanged")}}
+<p>Single</p>
+{{ember-select-guru
+  value=singleValue
+  options=options
+  onSearchInputChange=(action "queryTermChanged")
+  onSelect=(action "handleSingleSelect")}}
+
+<p>Multiple</p>
+{{ember-select-guru
+  value=multipleValue
+  options=options
+  onSearchInputChange=(action "queryTermChanged")
+  onSelect=(action "handleMultiSelect")
+  multiple=true}}
