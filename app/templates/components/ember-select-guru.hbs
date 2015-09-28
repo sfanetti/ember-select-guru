@@ -1,3 +1,16 @@
+Selected:
+{{#if multiple}}
+  <ul>
+    {{#each value as |selectedValue|}}
+      {{component multiValueComponent value=selectedValue}}
+    {{/each}}
+  </ul>
+{{else}}
+  {{component singleValueComponent value=value}}
+{{/if}}
+
+<br/>
+
 {{input placeholder=searchPlaceholder value=queryTerm}}
 
 {{#if isPending}}
