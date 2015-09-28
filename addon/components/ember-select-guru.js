@@ -43,9 +43,29 @@ export default Component.extend({
     });
   }),
   didReceiveAttrs() {
-    this.set('_options', this.get('attrs.options'));
+    // TODO - didReceiveAttrs is not observing changes in array length.... :( must be fixed somehow
+    if(this.get('multiple')) {
+      let value = Array.isArray(this.get('value')) ? Ember.A(this.get('value')) : Ember.A([]);
+      this.set('_value', value);
+    }
+    let possibleOptions = [];
+    if(this.get('multiple')) {
+      possibleOptions = _.difference(this.get('options'), this.get('_value'));
+    } else {
+      possibleOptions = _.difference(this.get('options'), [this.get('value')]);
+    }
+    this.set('_options', possibleOptions);
   },
   actions: {
-    onOptionClick(option) {}
+    onOptionClick(option) {
+      if(this.get('multiple')) {
+        // handle multiple selection
+        this.get('_value').pushObject(option);
+        this.attrs.onSelect(this.get('_value'));
+      } else {
+        // handle single selection
+        this.attrs.onSelect(option);
+      }
+    }
   }
 });
