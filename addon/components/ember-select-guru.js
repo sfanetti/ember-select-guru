@@ -27,7 +27,9 @@ export default Component.extend({
       const result = this.attrs.onSearchInputChange(this.get('queryTerm'));
       if(result == null) {
         // handle if result is undefined (internal search)
-        // TODO - perform internal search
+        if(!this.get('queryTerm')) { return this._handleAttrsChange(); }
+        const possibleOptions = this._searchForOptions();
+        this.set('_options', possibleOptions);
       } else if('function' === typeof result.then) {
         // handle if result is a promise
         this.set('isPending', true);
@@ -66,12 +68,25 @@ export default Component.extend({
   },
   _handleAttrsChange() {
     let possibleOptions = [];
-    if(this.get('multiple')) {
-      possibleOptions = _.difference(this.get('options'), this.get('value'));
+    let availableOptions = [];
+    if(this.get('queryTerm')) {
+      availableOptions = this.get('_options');
     } else {
-      possibleOptions = _.difference(this.get('options'), [this.get('value')]);
+      availableOptions = this.get('options');
+    }
+    if(this.get('multiple')) {
+      possibleOptions = _.difference(availableOptions, this.get('value'));
+    } else {
+      possibleOptions = _.difference(availableOptions, [this.get('value')]);
     }
     this.set('_value', this.get('value'));
     this.set('_options', possibleOptions);
+  },
+  _searchForOptions() {
+    const term = this.get('queryTerm');
+
+    return this.get('options').filter((item) => {
+      return (get(item, this.get('searchKey')) && (get(item, this.get('searchKey')).indexOf(term) > -1));
+    });
   }
 });
