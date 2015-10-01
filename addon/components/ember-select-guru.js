@@ -85,7 +85,7 @@ export default Component.extend({
   _searchForOptions() {
     const term = this.get('queryTerm');
 
-    return this.get('options').filter((item) => {
+    return this.get('_options').filter((item) => {
       return (get(item, this.get('searchKey')) && (get(item, this.get('searchKey')).indexOf(term) > -1));
     });
   }
