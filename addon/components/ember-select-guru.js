@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 const { _ } = window;
 
-const { Component, computed, observer } = Ember;
+const { Component, computed, observer, get } = Ember;
 
 export default Component.extend({
   isPending: false,
@@ -16,7 +16,8 @@ export default Component.extend({
   noOptionsComponent: 'no-options-component',
   singleValueComponent: 'single-value-component',
   multiValueComponent: 'multi-value-component',
-  hasOptions: computed.notEmpty('options'),
+  searchKey: 'value',
+  hasOptions: computed.notEmpty('_options'),
   queryTermObserver: observer('queryTerm', function() {
     Ember.run.once(() => {
       this.setProperties({
