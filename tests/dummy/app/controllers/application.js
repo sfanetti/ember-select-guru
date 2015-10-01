@@ -4,6 +4,7 @@ const { Controller } = Ember;
 
 export default Controller.extend({
   options: Ember.A(['123', '456']),
+  multipleValue: Ember.A([]),
   value: null,
   actions: {
     queryTermChanged(queryTerm) {
