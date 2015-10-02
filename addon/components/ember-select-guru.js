@@ -7,6 +7,7 @@ const { Component, computed, observer, get } = Ember;
 export default Component.extend({
   isPending: false,
   hasFailed: false,
+  remoteData: false,
   queryTerm: null,
   multiple: false,
   searchPlaceholder: 'Type to search...',
@@ -22,7 +23,8 @@ export default Component.extend({
     Ember.run.once(() => {
       this.setProperties({
         isPending: false,
-        hasFailed: false
+        hasFailed: false,
+        remoteData: false,
       });
       const result = this.attrs.onSearchInputChange(this.get('queryTerm'));
       if(result == null) {
@@ -33,6 +35,7 @@ export default Component.extend({
       } else if('function' === typeof result.then) {
         // handle if result is a promise
         this.set('isPending', true);
+        this.set('_remoteData', true);
         result.then(() => {
           this.set('isPending', false);
         }, () => {
@@ -67,9 +70,9 @@ export default Component.extend({
     this._handleAttrsChange();
   },
   _handleAttrsChange() {
-    let possibleOptions = [];
-    let availableOptions = [];
-    if(this.get('queryTerm')) {
+    let possibleOptions = [], availableOptions = [];
+
+    if(this.get('queryTerm') && !this.get('_remoteData')) {
       availableOptions = this.get('_options');
     } else {
       availableOptions = this.get('options');
