@@ -5,17 +5,16 @@ const { Controller } = Ember;
 export default Controller.extend({
   options: Ember.A([
     Ember.Object.create({
-      value: '123'
+      name: '123'
     }),
     Ember.Object.create({
-      value: '456'
+      name: '456'
     }),
     Ember.Object.create({
-      value: '758'
+      name: '758'
     })
   ]),
   multipleValue: Ember.A([]),
-  value: null,
   actions: {
     queryTermChanged(queryTerm) {
       console.log(queryTerm);
@@ -25,6 +24,14 @@ export default Controller.extend({
     },
     handleMultiSelect(options) {
       this.set('multipleValue', options);
+    },
+    remoteQueryTermChanged(queryTerm) {
+      return this.store.query('user', { q: queryTerm }).then((result) => {
+        this.set('remoteOptions', result.toArray());
+      });
+    },
+    handleRemoteSelect(option) {
+      this.set('remoteValue', option);
     }
   }
 });

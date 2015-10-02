@@ -16,7 +16,7 @@ export default Component.extend({
   noOptionsComponent: 'no-options-component',
   singleValueComponent: 'single-value-component',
   multiValueComponent: 'multi-value-component',
-  searchKey: 'value',
+  searchKey: 'name',
   hasOptions: computed.notEmpty('_options'),
   queryTermObserver: observer('queryTerm', function() {
     Ember.run.once(() => {

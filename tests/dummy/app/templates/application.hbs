@@ -14,3 +14,10 @@
   onSearchInputChange=(action "queryTermChanged")
   onSelect=(action "handleMultiSelect")
   multiple=true}}
+
+<p>Remote</p>
+{{ember-select-guru
+  value=remoteValue
+  options=remoteOptions
+  onSearchInputChange=(action "remoteQueryTermChanged")
+  onSelect=(action "handleRemoteSelect")}}
