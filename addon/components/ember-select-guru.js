@@ -63,6 +63,10 @@ export default Component.extend({
         // handle single selection
         this.attrs.onSelect(option);
       }
+    },
+    onRemoveValueClick(option) {
+      this.get('_value').removeObject(option);
+      this.attrs.onSelect(this.get('_value'));
     }
   },
   init() {

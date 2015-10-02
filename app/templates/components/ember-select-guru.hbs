@@ -2,7 +2,7 @@ Selected:
 {{#if multiple}}
   <ul>
     {{#each value as |selectedValue|}}
-      {{component multiValueComponent value=selectedValue}}
+      {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
     {{/each}}
   </ul>
 {{else}}
