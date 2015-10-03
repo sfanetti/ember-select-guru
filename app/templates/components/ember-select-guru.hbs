@@ -1,26 +1,46 @@
-Selected:
-{{#if multiple}}
-  <ul>
-    {{#each value as |selectedValue|}}
-      {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
-    {{/each}}
-  </ul>
-{{else}}
-  {{component singleValueComponent value=value}}
-{{/if}}
+<div class="value-wrapper" {{action "expandComponent"}} trigger-for={{name}}>
+  {{#if hasValue}}
+    {{#if multiple}}
+      {{#each value as |selectedValue|}}
+        {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
+      {{/each}}
+    {{else}}
+      {{component singleValueComponent value=value}}
+    {{/if}}
+  {{else}}
+    {{placeholder}}
+  {{/if}}
+</div>
 
-<br/>
-
-{{input placeholder=searchPlaceholder value=queryTerm}}
-
-{{#if isPending}}
-  {{component pendingComponent}}
-{{else}} {{#if hasFailed}}
-  {{component failureComponent}}
-{{else}} {{#if hasOptions}}
-  {{#each _options as |option|}}
-    {{component optionComponent option=option onClick=(action "onOptionClick")}}
-  {{/each}}
-{{else}}
-  {{component noOptionsComponent}}
-{{/if}}{{/if}}{{/if}}
+{{#ember-select-dropdown attachTo=attachTo visible=isExpanded name=name willOpenDropdown="willOpenDropdown" as |optionsList|}}
+  <div class="expanded-list">
+    {{#if multiple}}
+      <div class="multiple-value-selector">
+        {{#each value as |selectedValue|}}
+          {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
+        {{/each}}
+        {{input placeholder=searchPlaceholder value=queryTerm}}
+      </div>
+    {{else}}
+      <div class="single-value-selector">
+        {{component singleValueComponent value=value}}
+      </div>
+      <div class="single-value-search">
+        {{input placeholder=searchPlaceholder value=queryTerm}}
+      </div>
+    {{/if}}
+    <div class="options-wrapper">
+      {{#if isPending}}
+        {{component pendingComponent}}
+      {{else}} {{#if hasFailed}}
+        {{component failureComponent}}
+      {{else}} {{#if hasOptions}}
+        {{#each _options as |option|}}
+          {{component optionComponent option=option onClick=(action "onOptionClick")}}
+        {{/each}}
+      {{else}}
+        {{component noOptionsComponent}}
+      {{/if}}{{/if}}{{/if}}
+    </div>
+  </div>
+{{/ember-select-dropdown}}

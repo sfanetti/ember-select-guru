@@ -12,6 +12,7 @@ export default Component.extend({
   queryTerm: null,
   multiple: false,
   searchPlaceholder: 'Type to search...',
+  placeholder: 'Click to select...',
   pendingComponent: 'pending-component',
   failureComponent: 'failure-component',
   optionComponent: 'option-component',
@@ -20,6 +21,7 @@ export default Component.extend({
   multiValueComponent: 'multi-value-component',
   searchKey: 'name',
   hasOptions: computed.notEmpty('_options'),
+  hasValue: computed.notEmpty('value'),
   queryTermObserver: observer('queryTerm', function() {
     Ember.run.once(() => {
       this.setProperties({
@@ -68,11 +70,19 @@ export default Component.extend({
     onRemoveValueClick(option) {
       this.get('_value').removeObject(option);
       this.attrs.onSelect(this.get('_value'));
+    },
+    expandComponent() {
+      this.toggleProperty('isExpanded');
+    },
+    willOpenDropdown() {
+      this.set('queryTerm', '');
     }
   },
   init() {
     this._super.apply(this, arguments);
     this._handleAttrsChange();
+    this.set('attachTo', `#${this.get('elementId')}`);
+    this.set('name', `select-guru-${this.get('elementId')}`);
   },
   _handleAttrsChange() {
     let possibleOptions = [], availableOptions = [];
