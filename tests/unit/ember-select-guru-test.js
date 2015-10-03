@@ -1,10 +1,29 @@
+import Ember from 'ember';
 import { test, moduleForComponent } from 'ember-qunit';
+
+const { sinon } = window;
+
+const { run } = Ember;
 
 moduleForComponent('ember-select-guru',
   'Unit: ember-select-guru');
 
 test('query change executes #onSearchInputChange action', function(assert) {
-  assert.expect(0);
+  assert.expect(2);
+
+  let component = this.subject();
+  let queryHandler = () => {};
+
+  component.set('attrs', {});
+  component.set('attrs.onSearchInputChange', queryHandler);
+  let onSearchInputChangeSpy = sinon.spy(component.get('attrs'), 'onSearchInputChange');
+
+  run(() => {
+    component.set('queryTerm', 'New value');
+  });
+
+  assert.ok(onSearchInputChangeSpy.calledOnce, '#onSearchInputChange should be executed');
+  assert.ok(onSearchInputChangeSpy.calledWith('New value'), '#onSearchInputChange should be executed with proper query term');
 });
 
 test('if #onSearchInputChange returns null, it sets filtered options except currently selected', function(assert) {
