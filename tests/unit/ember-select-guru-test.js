@@ -27,7 +27,29 @@ test('query change executes #onSearchInputChange action', function(assert) {
 });
 
 test('if #onSearchInputChange returns null, it sets filtered options except currently selected', function(assert) {
-  assert.expect(0);
+  assert.expect(3);
+
+  let component = this.subject();
+  let queryHandler = () => { return null; };
+  const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
+
+  component.set('attrs', {});
+  component.set('attrs.onSearchInputChange', queryHandler);
+
+  let onSearchInputChangeSpy = sinon.spy(component.get('attrs'), 'onSearchInputChange');
+
+  run(() => {
+    component.set('options', options);
+  });
+
+  run(() => {
+    component.set('value', options[0]);
+    component.set('queryTerm', 'ABC');
+  });
+
+  assert.equal(component.get('_options.length'), 2, '_options should contain of two elements');
+  assert.ok(Ember.A(component.get('_options')).contains(options[1]), '_options should contain second element from array');
+  assert.ok(Ember.A(component.get('_options')).contains(options[2]), '_options should contain third element from array');
 });
 
 test('if #onSearchInputChange returns promise, it gets into pending state', function(assert) {
