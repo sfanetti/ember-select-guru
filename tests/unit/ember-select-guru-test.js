@@ -36,8 +36,6 @@ test('if #onSearchInputChange returns null, it sets filtered options except curr
   component.set('attrs', {});
   component.set('attrs.onSearchInputChange', queryHandler);
 
-  let onSearchInputChangeSpy = sinon.spy(component.get('attrs'), 'onSearchInputChange');
-
   run(() => {
     component.set('options', options);
   });
@@ -53,7 +51,19 @@ test('if #onSearchInputChange returns null, it sets filtered options except curr
 });
 
 test('if #onSearchInputChange returns promise, it gets into pending state', function(assert) {
-  assert.expect(0);
+  assert.expect(1);
+
+  let component = this.subject();
+  let queryHandler = () => { return new Ember.RSVP.Promise(function(){}); };
+
+  component.set('attrs', {});
+  component.set('attrs.onSearchInputChange', queryHandler);
+
+  run(() => {
+    component.set('queryTerm', 'ABC');
+  });
+
+  assert.ok(component.get('isPending'), 'component should move to isPending state');
 });
 
 test('if #onSearchInputChange returned promise fulfills, it sets options except currently selected', function(assert) {
