@@ -114,7 +114,26 @@ test('if #onSearchInputChange returned promise fails, it gets into failed state'
 });
 
 test('if #onSearchInputChange returns array, it sets intersection of returned array and currently available options', function(assert) {
-  assert.expect(0);
+  assert.expect(2);
+
+  let component = this.subject();
+  const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
+  let queryHandler = () => { return options.slice(0, 1); };
+
+  component.set('attrs', {});
+  component.set('attrs.onSearchInputChange', queryHandler);
+
+  run(() => {
+    component.set('options', options);
+  });
+
+  run(() => {
+    component.set('value', options[0]);
+    component.set('queryTerm', 'ABC');
+  });
+
+  assert.equal(component.get('_options.length'), 1, '_options should contain one element');
+  assert.ok(Ember.A(component.get('_options')).contains(options[0]), '_options should contain first element from array');
 });
 
 test('value change updates possible options', function(assert) {
