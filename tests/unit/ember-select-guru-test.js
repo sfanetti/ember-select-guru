@@ -137,9 +137,49 @@ test('if #onSearchInputChange returns array, it sets intersection of returned ar
 });
 
 test('value change updates possible options', function(assert) {
-  assert.expect(0);
+  assert.expect(3);
+
+  let component = this.subject();
+  let queryHandler = () => { return null; };
+  const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
+
+  run(() => {
+    component.set('options', options);
+  });
+
+  run(() => {
+    component.set('value', options[0]);
+  });
+
+  assert.equal(component.get('_options.length'), 2, '_options should contain two elements');
+  assert.ok(Ember.A(component.get('_options')).contains(options[1]), '_options should contain second element from array');
+  assert.ok(Ember.A(component.get('_options')).contains(options[2]), '_options should contain third element from array');
 });
 
 test('options change updates possible options', function(assert) {
-  assert.expect(0);
+  assert.expect(6);
+
+  let component = this.subject();
+  let queryHandler = () => { return null; };
+  const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
+
+  run(() => {
+    component.set('options', options);
+  });
+
+  run(() => {
+    component.set('value', options[0]);
+  });
+
+  assert.equal(component.get('_options.length'), 2, '_options should contain two elements');
+  assert.ok(Ember.A(component.get('_options')).contains(options[1]), '_options should contain second element from array');
+  assert.ok(Ember.A(component.get('_options')).contains(options[2]), '_options should contain third element from array');
+
+  run(() => {
+    component.set('value', options[1]);
+  });
+
+  assert.equal(component.get('_options.length'), 2, '_options should contain two elements');
+  assert.ok(Ember.A(component.get('_options')).contains(options[0]), '_options should contain first element from array');
+  assert.ok(Ember.A(component.get('_options')).contains(options[2]), '_options should contain third element from array');
 });
