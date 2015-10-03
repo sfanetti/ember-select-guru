@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
-const { _ } = window;
+import intersection from 'npm:lodash/array/intersection';
+import difference from 'npm:lodash/array/difference';
 
 const { Component, computed, observer, get } = Ember;
 
@@ -43,7 +44,7 @@ export default Component.extend({
         });
       } else if(Array.isArray(result)) {
         // handle if result is an array (external search)
-        const options = _.intersection(result, this.get('options'));
+        const options = intersection(result, this.get('options'));
         this.set('_options', options);
       }
     });
@@ -82,9 +83,9 @@ export default Component.extend({
       availableOptions = this.get('options');
     }
     if(this.get('multiple')) {
-      possibleOptions = _.difference(availableOptions, this.get('value'));
+      possibleOptions = difference(availableOptions, this.get('value'));
     } else {
-      possibleOptions = _.difference(availableOptions, [this.get('value')]);
+      possibleOptions = difference(availableOptions, [this.get('value')]);
     }
     this.set('_value', this.get('value'));
     this.set('_options', possibleOptions);
