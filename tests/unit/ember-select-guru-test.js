@@ -45,7 +45,7 @@ test('if #onSearchInputChange returns null, it sets filtered options except curr
     component.set('queryTerm', 'ABC');
   });
 
-  assert.equal(component.get('_options.length'), 2, '_options should contain of two elements');
+  assert.equal(component.get('_options.length'), 2, '_options should contain two elements');
   assert.ok(Ember.A(component.get('_options')).contains(options[1]), '_options should contain second element from array');
   assert.ok(Ember.A(component.get('_options')).contains(options[2]), '_options should contain third element from array');
 });
