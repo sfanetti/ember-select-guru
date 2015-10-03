@@ -54,7 +54,8 @@ test('if #onSearchInputChange returns promise, it gets into pending state', func
   assert.expect(1);
 
   let component = this.subject();
-  let queryHandler = () => { return new Ember.RSVP.Promise(function(){}); };
+  let promise = new Ember.RSVP.Promise(function(){});
+  let queryHandler = () => { return promise; };
 
   component.set('attrs', {});
   component.set('attrs.onSearchInputChange', queryHandler);
@@ -66,12 +67,50 @@ test('if #onSearchInputChange returns promise, it gets into pending state', func
   assert.ok(component.get('isPending'), 'component should move to isPending state');
 });
 
-test('if #onSearchInputChange returned promise fulfills, it sets options except currently selected', function(assert) {
-  assert.expect(0);
+test('if #onSearchInputChange returned promise fulfills, it gets back from isPending state', function(assert) {
+  assert.expect(1);
+  let done = assert.async();
+
+  let component = this.subject();
+  let defer = Ember.RSVP.defer();
+  let queryHandler = () => { return defer.promise; };
+
+  component.set('attrs', {});
+  component.set('attrs.onSearchInputChange', queryHandler);
+
+  run(() => {
+    component.set('queryTerm', 'ABC');
+  });
+
+  defer.resolve();
+
+  run.next(() => {
+    assert.ok(!component.get('isPending'), 'component should move from isPending state');
+    done();
+  });
 });
 
 test('if #onSearchInputChange returned promise fails, it gets into failed state', function(assert) {
-  assert.expect(0);
+  assert.expect(1);
+  let done = assert.async();
+
+  let component = this.subject();
+  let defer = Ember.RSVP.defer();
+  let queryHandler = () => { return defer.promise; };
+
+  component.set('attrs', {});
+  component.set('attrs.onSearchInputChange', queryHandler);
+
+  run(() => {
+    component.set('queryTerm', 'ABC');
+  });
+
+  defer.reject();
+
+  run.next(() => {
+    assert.ok(component.get('hasFailed'), 'component should move to hasFailed state');
+    done();
+  });
 });
 
 test('if #onSearchInputChange returns array, it sets intersection of returned array and currently available options', function(assert) {
