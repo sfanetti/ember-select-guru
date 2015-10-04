@@ -140,7 +140,6 @@ test('value change updates possible options', function(assert) {
   assert.expect(3);
 
   let component = this.subject();
-  let queryHandler = () => { return null; };
   const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
 
   run(() => {
@@ -160,7 +159,6 @@ test('options change updates possible options', function(assert) {
   assert.expect(6);
 
   let component = this.subject();
-  let queryHandler = () => { return null; };
   const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
 
   run(() => {
