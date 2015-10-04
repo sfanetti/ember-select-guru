@@ -43,6 +43,7 @@ export default Component.extend({
           this.set('isPending', false);
         }, () => {
           this.set('hasFailed', true);
+          this.set('isPending', false);
         });
       } else if(Array.isArray(result)) {
         // handle if result is an array (external search)
@@ -102,9 +103,10 @@ export default Component.extend({
   },
   _searchForOptions() {
     const term = this.get('queryTerm');
+    const searchKey = this.get('searchKey');
 
     return this.get('_options').filter((item) => {
-      return (get(item, this.get('searchKey')) && (get(item, this.get('searchKey')).indexOf(term) > -1));
+      return (get(item, searchKey) && (get(item, searchKey).indexOf(term) > -1));
     });
   }
 });
