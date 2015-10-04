@@ -1,4 +1,4 @@
-<div class="value-wrapper" {{action "expandComponent"}} trigger-for={{name}}>
+<div class="value-wrapper" {{action "expandComponent"}}>
   {{#if hasValue}}
     {{#if multiple}}
       {{#each value as |selectedValue|}}
@@ -12,35 +12,37 @@
   {{/if}}
 </div>
 
-{{#ember-select-dropdown attachTo=attachTo visible=isExpanded name=name bodyTag=bodyTag willOpenDropdown="willOpenDropdown" as |optionsList|}}
-  <div class="expanded-list">
-    {{#if multiple}}
-      <div class="multiple-value-selector">
-        {{#each value as |selectedValue|}}
-          {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
-        {{/each}}
-        {{input placeholder=searchPlaceholder value=queryTerm}}
-      </div>
-    {{else}}
-      <div class="single-value-selector">
-        {{component singleValueComponent value=value}}
-      </div>
-      <div class="single-value-search">
-        {{input placeholder=searchPlaceholder value=queryTerm}}
-      </div>
-    {{/if}}
-    <div class="options-wrapper">
-      {{#if isPending}}
-        {{component pendingComponent}}
-      {{else}} {{#if hasFailed}}
-        {{component failureComponent}}
-      {{else}} {{#if hasOptions}}
-        {{#each _options as |option|}}
-          {{component optionComponent option=option onClick=(action "onOptionClick")}}
-        {{/each}}
+{{#if isExpanded}}
+  {{#ember-select-dropdown name=name visible=isExpanded willHideDropdown="willHideDropdown" as |optionsList|}}
+    <div class="expanded-list">
+      {{#if multiple}}
+        <div class="multiple-value-selector">
+          {{#each value as |selectedValue|}}
+            {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
+          {{/each}}
+          {{input placeholder=searchPlaceholder value=queryTerm class='ember-select-guru-search'}}
+        </div>
       {{else}}
-        {{component noOptionsComponent}}
-      {{/if}}{{/if}}{{/if}}
+        <div class="single-value-selector">
+          {{component singleValueComponent value=value}}
+        </div>
+        <div class="single-value-search">
+          {{input placeholder=searchPlaceholder value=queryTerm class='ember-select-guru-search'}}
+        </div>
+      {{/if}}
+      <div class="options-wrapper">
+        {{#if isPending}}
+          {{component pendingComponent}}
+        {{else}} {{#if hasFailed}}
+          {{component failureComponent}}
+        {{else}} {{#if hasOptions}}
+          {{#each _options as |option|}}
+            {{component optionComponent option=option onClick=(action "onOptionClick")}}
+          {{/each}}
+        {{else}}
+          {{component noOptionsComponent}}
+        {{/if}}{{/if}}{{/if}}
+      </div>
     </div>
-  </div>
-{{/ember-select-dropdown}}
+  {{/ember-select-dropdown}}
+{{/if}}

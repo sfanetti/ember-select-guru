@@ -1,3 +1,8 @@
-.hidden {
-  display: none;
+.el-tether {
+  position: absolute;
+  top: 0;
+}
+
+.ember-select-guru {
+  position: relative;
 }

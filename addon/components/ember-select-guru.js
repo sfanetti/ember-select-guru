@@ -20,6 +20,7 @@ export default Component.extend({
   singleValueComponent: 'single-value-component',
   multiValueComponent: 'multi-value-component',
   searchKey: 'name',
+  classNames: 'ember-select-guru',
   hasOptions: computed.notEmpty('_options'),
   hasValue: computed.notEmpty('value'),
   queryTermObserver: observer('queryTerm', function() {
@@ -73,10 +74,11 @@ export default Component.extend({
       this.attrs.onSelect(this.get('_value'));
     },
     expandComponent() {
-      this.toggleProperty('isExpanded');
-    },
-    willOpenDropdown() {
+      this.set('isExpanded', true);
       this.set('queryTerm', '');
+    },
+    willHideDropdown() {
+      this.set('isExpanded', false);
     }
   },
   init() {

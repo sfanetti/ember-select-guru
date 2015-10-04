@@ -6,7 +6,7 @@ const { sinon } = window;
 const { run } = Ember;
 
 moduleForComponent('ember-select-guru',
-  'Unit: ember-select-guru');
+  'Unit: ember-select-guru', { unit: true });
 
 test('query change executes #onSearchInputChange action', function(assert) {
   assert.expect(2);

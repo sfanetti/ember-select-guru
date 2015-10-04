@@ -1,13 +1,3 @@
-{{#if bodyTag}}
-  {{#ember-wormhole to=bodyElement}}
-    <div class="tether-wrapper {{unless visible 'hidden'}}" name={{name}}>
-      {{yield}}
-    </div>
-  {{/ember-wormhole}}
-{{else}}
-  {{#ember-wormhole destinationElement=bodyElement}}
-    <div class="tether-wrapper {{unless visible 'hidden'}}" name={{name}}>
-      {{yield}}
-    </div>
-  {{/ember-wormhole}}
-{{/if}}
+<div class="tether-wrapper" name={{name}}>
+  {{yield}}
+</div>

@@ -158,7 +158,7 @@ test('it closes the dropdown on selection', function(assert) {
   assert.equal(Ember.$('.options-wrapper').children().length, 3, 'dropdown should render all options');
 
   Ember.$('.options-wrapper').children().last().click();
-  assert.equal(Ember.$('.tether-wrapper.hidden').length, 1, 'dropdown should hide');
+  assert.equal(Ember.$('.tether-wrapper').length, 0, 'dropdown should hide');
 });
 
 test('it closes the dropdown on remove from multiple selection', function(assert) {
@@ -186,5 +186,5 @@ test('it closes the dropdown on remove from multiple selection', function(assert
   assert.equal(Ember.$(".multiple-value-selector").children('li').length, 1, 'dropdown should render selected values');
 
   Ember.$(".multiple-value-selector li span").click();
-  assert.equal(Ember.$('.tether-wrapper.hidden').length, 1, 'dropdown should hide');
+  assert.equal(Ember.$('.tether-wrapper').length, 0, 'dropdown should hide');
 });
