@@ -162,5 +162,29 @@ test('it closes the dropdown on selection', function(assert) {
 });
 
 test('it closes the dropdown on remove from multiple selection', function(assert) {
-  assert.expect(0);
+  assert.expect(4);
+
+  const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
+
+  this.setProperties({
+    options,
+    value: Ember.A([options[0]]),
+    actions: {}
+  });
+
+  this.set('actions.queryTermChanged', () => { return null; });
+  this.set('actions.onSelect', (value) => { this.set('value', value); });
+
+  this.render(
+    hbs('{{ember-select-guru multiple=true value=value options=options onSearchInputChange=(action "queryTermChanged") onSelect=(action "onSelect")}}')
+  );
+
+  this.$('.value-wrapper').click();
+
+  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  assert.equal(Ember.$('.options-wrapper').children().length, 2, 'dropdown should render possible options except selected one');
+  assert.equal(Ember.$(".multiple-value-selector").children('li').length, 1, 'dropdown should render selected values');
+
+  Ember.$(".multiple-value-selector li span").click();
+  assert.equal(Ember.$('.tether-wrapper.hidden').length, 1, 'dropdown should hide');
 });
