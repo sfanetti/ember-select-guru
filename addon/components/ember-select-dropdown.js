@@ -13,7 +13,13 @@ export default Ember.Component.extend({
   attachTo: null,
 
   bodyElement: computed(function() {
-    return Ember.$('body')[0];
+    if (Ember.testing && this.get('bodyTag')) {
+      return 'ember-testing';
+    } else if(Ember.testing) {
+      return Ember.$('#ember-testing')[0];
+    } else {
+      return this.get('bodyTag') || Ember.$('body')[0];
+    }
   }),
 
   willInsertElement: function() {
