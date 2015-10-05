@@ -2,6 +2,7 @@ import Ember from 'ember';
 import { test, moduleForComponent } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+const { sinon } = window;
 const { run } = Ember;
 
 moduleForComponent('ember-select-guru/components/ember-select-guru',
@@ -188,3 +189,37 @@ test('it closes the dropdown on remove from multiple selection', function(assert
   Ember.$(".multiple-value-selector li span").click();
   assert.equal(Ember.$('.tether-wrapper').length, 0, 'dropdown should hide');
 });
+
+test('it sends #onSelect action with proper values set on remove value click', function(assert) {
+  assert.expect(6);
+
+  const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
+
+  this.setProperties({
+    options,
+    value: Ember.A([options[0], options[1]]),
+    actions: {}
+  });
+
+  this.set('actions.queryTermChanged', () => { return null; });
+  this.set('actions.onSelect', (value) => { this.set('value', value); });
+
+  const onSelectSpy = sinon.spy(this.get('actions'), 'onSelect');
+
+  this.render(
+    hbs('{{ember-select-guru multiple=true value=value options=options onSearchInputChange=(action "queryTermChanged") onSelect=(action "onSelect")}}')
+  );
+
+  this.$('.value-wrapper').click();
+
+  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  assert.equal(Ember.$('.options-wrapper').children().length, 1, 'dropdown should render possible options except selected ones');
+  assert.equal(Ember.$(".multiple-value-selector").children('li').length, 2, 'dropdown should render selected values');
+
+  Ember.$(".multiple-value-selector li:first span").click();
+  assert.equal(Ember.$('.tether-wrapper').length, 0, 'dropdown should hide');
+  assert.ok(onSelectSpy.calledOnce, '#onSelect should be called once for removed option');
+  const onSelectSpyCall = onSelectSpy.getCall(0);
+  assert.equal(onSelectSpyCall.args[0][0], options[1], '#onSelect should be called with one selected value');
+});
+
