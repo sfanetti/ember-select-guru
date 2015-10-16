@@ -154,3 +154,30 @@ We will filter the numbers and return only those that are bigger than the number
     </pre>
   </div>
 </div>
+
+<h2>Customizing components</h2>
+
+You can customize each <code>ember-select-guru</code> element by define your own components.
+
+<pre>
+  &#123;{ember-select-guru
+    value=singleValue
+    options=options
+    optionComponent='list-item'
+    singleValueComponent='single-selected'
+
+    onSearchInputChange=(action "queryTermChanged")
+    onSelect=(action "handleSingleSelect")}}
+</pre>
+
+In this case we have two custom components: <code>list-item</code> and <code>single-selected</code>. In addition <code>list-item</code>
+consists <code>x-gravatar</code> component, so we can pass components with nested components as well.
+
+{{ember-select-guru
+  value=singleValue
+  options=options
+  optionComponent='list-item'
+  singleValueComponent='single-selected'
+
+  onSearchInputChange=(action "queryTermChanged")
+  onSelect=(action "handleSingleSelect")}}
