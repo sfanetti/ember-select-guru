@@ -210,7 +210,7 @@
           value=singleValue
           options=colorOptions
           optionComponent='list-item'
-          singleValueComponent='single-selected'
+          singleValueComponent='color-selected'
           onSearchInputChange=(action "queryTermChanged")
           onSelect=(action "handleSingleSelect")}}
         </div>
@@ -219,9 +219,9 @@
           {{#ember-highlight-code language="handlebars"}}
             \{{ember-select-guru
               value=singleValue
-              options=options
+              options=colorOptions
               optionComponent='list-item'
-              singleValueComponent='single-selected'
+              singleValueComponent='color-selected'
               onSearchInputChange=(action "queryTermChanged")
               onSelect=(action "handleSingleSelect")}}
           {{/ember-highlight-code}}
