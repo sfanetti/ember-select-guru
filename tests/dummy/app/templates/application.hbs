@@ -33,15 +33,13 @@
         </div>
         <div class="col-md-8">
           <p>First you need to configure a controller action bound to <code>onSelect</code> event.</p>
-          <pre>
-          ```
-          actions: {
-            queryTermChanged(queryTerm) {
-              console.log(queryTerm)
+          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+            actions: {
+              queryTermChanged(queryTerm) {
+                console.log(queryTerm)
+              }
             }
-          }
-          ```
-          </pre>
+          {{/ember-highlight-code}}
           <p>The single select box template is declared using <code>singeValue</code> attribute as a component value.</p>
           <pre>
             &#123;{ember-select-guru
@@ -75,11 +73,11 @@
                 </pre>
           You can pass through <code>options</code> an array of objects which serves data.
           The controller requires the action such as
-          <pre>
-                handleMultiSelect(options) {
-                  this.set('multipleValue', options);
-                }
-                </pre>
+          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+            handleMultiSelect(options) {
+              this.set('multipleValue', options);
+            }
+          {{/ember-highlight-code}}
           and don't forgot about setting <code>multipleValue</code> as an empty array. It could be done in setup controller and it is important during first initializing a controller.
         </div>
       </div>
@@ -99,22 +97,23 @@
         </div>
         <div class="col-md-8">
           We decided to search by the options <code>description</code> attribute. The options we have are as follows:
-          <pre>
-      [
-        {
-          name: '123',
-          description: 'one hundred twenty-three'
-        },
-        {
-          name: '456',
-          description: 'four hundred fifty-six'
-        },
-        {
-          name: '758',
-          description: 'seven hundred fifty-eight'
-        }
-      ]
-</pre>
+          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+            [
+              {
+                name: '123',
+                description: 'one hundred twenty-three'
+              },
+              {
+                name: '456',
+                description: 'four hundred fifty-six'
+              },
+              {
+                name: '758',
+                description: 'seven hundred fifty-eight'
+              }
+            ]
+          {{/ember-highlight-code}}
+
           {{ember-select-guru
           value=singleValue
           options=options
@@ -131,23 +130,25 @@
         <strong>onSearchInputChange=(action "customSearchInputChange")</strong>
         onSelect=(action "handleSingleSelect")}}
 </pre>
-          <pre>
-        actions: {
-          customSearchInputChange(queryTerm) {
-            const options = this.get('options');
-            const number = parseInt(queryTerm, 10);
-            if(queryTerm == '') {
-              return options;
+
+        {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+          actions: {
+            customSearchInputChange(queryTerm) {
+              const options = this.get('options');
+              const number = parseInt(queryTerm, 10);
+              if(queryTerm == '') {
+                return options;
+              }
+              if(isNaN(number)) {
+                return Ember.A();
+              }
+              return options.filter((item) => {
+                return parseInt(item.get('name'), 10) > number;
+              });
             }
-            if(isNaN(number)) {
-              return Ember.A();
-            }
-            return options.filter((item) => {
-              return parseInt(item.get('name'), 10) > number;
-            });
           }
-        }
-</pre>
+        {{/ember-highlight-code}}
+
           {{ember-select-guru
           value=singleValue
           options=options
@@ -176,22 +177,22 @@
             onSelect=(action "handleSelect")}}
 </pre>
           <p>Remember, that ember-select-guru has no two-way data binding. Handle <code>onSelect</code> properly by setting <code>value</code> with proper arguments. Your controller code should look like this:</p>
-          <pre>
-          actions: {
-            queryTermChanged(queryTerm) {
-              // remember to return the result of store query or any other Promise
-              return this.store.query('user', { q: queryTerm }).then((result) => {
-                // -- you must explicitly set `options` binded to component in the fetching callback
-                this.set('options', result.toArray());
-              });
-            },
-            handleRemoteSelect(option) {
-              // -- option is single object instance in regular mode (no multiple)
-              // -- in multiple mode, it would be array of objects
-              this.set('value', option);
+          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+            actions: {
+              queryTermChanged(queryTerm) {
+                // remember to return the result of store query or any other Promise
+                return this.store.query('user', { q: queryTerm }).then((result) => {
+                  // -- you must explicitly set `options` binded to component in the fetching callback
+                  this.set('options', result.toArray());
+                });
+              },
+              handleRemoteSelect(option) {
+                // -- option is single object instance in regular mode (no multiple)
+                // -- in multiple mode, it would be array of objects
+                this.set('value', option);
+              }
             }
-          }
-</pre>
+          {{/ember-highlight-code}}
         </div>
       </div>
       <div class="row">
