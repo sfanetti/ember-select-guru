@@ -71,7 +71,7 @@
           multiple=true}}
         </div>
         <div class="col-md-8">
-          Example code of component embedded in a template:
+          <p>Example code of component embedded in a template:</p>
           {{#ember-highlight-code language="handlebars"}}
             \{{ember-select-guru
               value=multipleValue
@@ -80,14 +80,13 @@
               onSelect=(action "handleMultiSelect")
               multiple=true}}
           {{/ember-highlight-code}}
-          You can pass through <code>options</code> an array of objects which serves data.
-          The controller requires the action such as
+          <p>You can pass through <code>options</code> an array of objects which serves data. The controller requires the action such as: </p>
           {{#ember-highlight-code language="javascript"}}
             handleMultiSelect(options) {
               this.set('multipleValue', options);
             }
           {{/ember-highlight-code}}
-          and don't forgot about setting <code>multipleValue</code> as an empty array. It could be done in setup controller and it is important during first initializing a controller.
+          <p>and don't forgot about setting <code>multipleValue</code> as an empty array. It could be done in setup controller and it is important during first initializing a controller.</p>
         </div>
       </div>
       <hr />
@@ -97,8 +96,7 @@
           <h2><code>searchKey</code> property</h2>
         </div>
         <div class="col-md-4">
-
-          You can easily change the attribute used for searching. Try typing "fifty" into the field below.
+          <p>You can easily change the attribute used for searching. Try typing "fifty" into the field below.</p>
 
           {{ember-select-guru
           value=singleValue
@@ -107,7 +105,7 @@
           onSelect=(action "handleSingleSelect")}}
         </div>
         <div class="col-md-8">
-          We decided to search by the options <code>description</code> attribute. The options we have are as follows:
+          <p>We decided to search by the options <code>description</code> attribute. The options we have are as follows:</p>
           {{#ember-highlight-code language="javascript"}}
             [
               {
@@ -125,7 +123,7 @@
             ]
           {{/ember-highlight-code}}
 
-          You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
+          <p>You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.</p>
 
           {{#ember-highlight-code language="handlebars"}}
             \{{ember-select-guru
@@ -142,7 +140,7 @@
           <h2>Custom search</h2>
         </div>
         <div class="col-md-4">
-          We will filter the numbers and return only those that are bigger than the number in search input.
+          <p>We will filter the numbers and return only those that are bigger than the number in search input.</p>
           {{ember-select-guru
             value=singleValue
             options=options
@@ -227,7 +225,7 @@
           <h2>Customizing components</h2>
         </div>
         <div class="col-md-4">
-          You can customize each <code>ember-select-guru</code> element by define your own components.
+          <p>You can customize each <code>ember-select-guru</code> element by define your own components.</p>
           {{ember-select-guru
           value=singleValue
           options=colorOptions
@@ -248,7 +246,7 @@
               onSelect=(action "handleSingleSelect")}}
           {{/ember-highlight-code}}
 
-          In this case we have two custom components: <code>list-item</code> and <code>single-selected</code>. In addition <code>list-item</code> consists <code>x-gravatar</code> component, so we can pass components with nested components as well.
+          <p>In this case we have two custom components: <code>list-item</code> and <code>single-selected</code>. In addition <code>list-item</code> consists <code>x-gravatar</code> component, so we can pass components with nested components as well.</p>
         </div>
       </div>
     </div>
