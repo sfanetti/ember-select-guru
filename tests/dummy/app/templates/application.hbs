@@ -1,183 +1,221 @@
 <h1 id="title">ember-select-guru</h1>
 
-<h2>Examples</h2>
-<p>Single</p>
-{{ember-select-guru
-  value=singleValue
-  options=options
-  onSearchInputChange=(action "queryTermChanged")
-  onSelect=(action "handleSingleSelect")}}
+<div class="container-fluid">
+  <div class="row">
+    <h2>Examples</h2>
+    <div class="col-md-4">
+        <h2>Single</h2>
+        {{ember-select-guru
+          value=singleValue
+          options=options
+          onSearchInputChange=(action "queryTermChanged")
+          onSelect=(action "handleSingleSelect")}}
+    </div>
+    <div class="col-md-8">
+      <p>Waiting for you</p>
+    </div>
+  </div>
 
-<h2>Multiple</h2>
-ember-select-guru allows you to choose multiple items from a defined object in controller. Also, you can remove any item from the list.
 
-{{ember-select-guru
-  value=multipleValue
-  options=options
-  onSearchInputChange=(action "queryTermChanged")
-  onSelect=(action "handleMultiSelect")
-  multiple=true}}
+  <div class="row">
 
-<p>Example</p>
-Below is a example code of component embedded in a template:
-<pre>
-&#123;&#123;ember-select-guru
-  value=multipleValue
-  options=options
-  onSearchInputChange=(action "queryTermChanged")
-  onSelect=(action "handleMultiSelect")
-  multiple=true}}
-</pre>
-You can pass through <code>options</code> an array of objects which serves data.
 
-The controller requires the action such as
-<pre>
-handleMultiSelect(options) {
-  this.set('multipleValue', options);
-}
-</pre>
-and don't forgot about setting <code>multipleValue</code> as an empty array. It could be done in setup controller and it is important during first initializing a controller.
+    <div class="col-md-4">
+      <h2>Multiple</h2>
+      <p>ember-select-guru allows you to choose multiple items from a defined object in controller. Also, you can remove any item from the list.</p>
 
-<h2>Custom search</h2>
-
-<h3>Changing <code>searchKey</code> property</h3>
-
-You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
-
-<pre>
-&#123;{ember-select-guru
-  value=singleValue
-  options=options
-  <strong>searchKey='description'</strong>
-  onSelect=(action "handleSingleSelect")}}
-</pre>
-
-We decided to search by the options <code>description</code> attribute. The options we have are as follows:
-
-<pre>
-[
-  {
-    name: '123',
-    description: 'one hundred twenty-three'
-  },
-  {
-    name: '456',
-    description: 'four hundred fifty-six'
-  },
-  {
-    name: '758',
-    description: 'seven hundred fifty-eight'
-  }
-]
-</pre>
-
-{{ember-select-guru
-  value=singleValue
-  options=options
-  searchKey='description'
-  onSelect=(action "handleSingleSelect")}}
-
-<h3>Providing your own search mechanism</h3>
-
-You can provide your own handler for when the value of search input changes. This handler needs to return either an array, or a promise that will return an array. If it doesn't return anything, the default behaviour will apply.
-
-<h4>Returning an array</h4>
-
-We will filter the numbers and return only those that are bigger than the number in search input.
-
-<pre>
-&#123;{ember-select-guru
-  value=singleValue
-  options=options
-  <strong>onSearchInputChange=(action "customSearchInputChange")</strong>
-  onSelect=(action "handleSingleSelect")}}
-</pre>
-
-<pre>
-  actions: {
-    customSearchInputChange(queryTerm) {
-      const options = this.get('options');
-      const number = parseInt(queryTerm, 10);
-      if(queryTerm == '') {
-        return options;
-      }
-      if(isNaN(number)) {
-        return Ember.A();
-      }
-      return options.filter((item) => {
-        return parseInt(item.get('name'), 10) > number;
-      });
-    }
-  }
-</pre>
-
-{{ember-select-guru
-  value=singleValue
-  options=options
-  onSearchInputChange=(action "customSearchInputChange")
-  onSelect=(action "handleSingleSelect")}}
-
-<div class="row">
-  <div class="col-md-12">
-    <h4>Remote single selection</h4>
-    <p>Remote single selection works the same as the former ones, except you need to return promise that is fetching your data from <code>onSearchInputChange</code> action. ember-select-guru will chain a callback on that promise and enter the <code>pending</code> state waiting for your data. Your job is to wait for that promise and eventually obtain the data from remote endpoint. When the promise resolves, you should copy the result data from the promise to the <code>options</code> binidng. Thanks to Ember Run Loop mechanism, the component will go back from <code>pending</code> state to normal state and accept your new data in options in the same moment.</p>
-    <p>Take a look at this example:</p>
-    {{ember-select-guru
-      value=remoteValue
-      options=remoteOptions
-      onSearchInputChange=(action "remoteQueryTermChanged")
-      onSelect=(action "handleRemoteSelect")}}
-    <p>Your template should look like this:</p>
-    <pre>
-      &#123;{ember-select-guru
-        value=value
+      {{ember-select-guru
+        value=multipleValue
         options=options
         onSearchInputChange=(action "queryTermChanged")
-        onSelect=(action "handleSelect")}}
-    </pre>
-    <p>Remember, that ember-select-guru has no two-way data binding. Handle <code>onSelect</code> properly by setting <code>value</code> with proper arguments. Your controller code should look like this:</p>
-    <pre>
-      actions: {
-        queryTermChanged(queryTerm) {
-          // remember to return the result of store query or any other Promise
-          return this.store.query('user', { q: queryTerm }).then((result) => {
-            // -- you must explicitly set `options` binded to component in the fetching callback
-            this.set('options', result.toArray());
-          });
-        },
-        handleRemoteSelect(option) {
-          // -- option is single object instance in regular mode (no multiple)
-          // -- in multiple mode, it would be array of objects
-          this.set('value', option);
-        }
+        onSelect=(action "handleMultiSelect")
+        multiple=true}}
+
+    </div>
+
+    <div class="col-md-8">
+      Example code of component embedded in a template:
+      <pre>
+      &#123;&#123;ember-select-guru
+        value=multipleValue
+        options=options
+        onSearchInputChange=(action "queryTermChanged")
+        onSelect=(action "handleMultiSelect")
+        multiple=true}}
+      </pre>
+      You can pass through <code>options</code> an array of objects which serves data.
+
+      The controller requires the action such as
+      <pre>
+      handleMultiSelect(options) {
+        this.set('multipleValue', options);
       }
-    </pre>
+      </pre>
+      and don't forgot about setting <code>multipleValue</code> as an empty array. It could be done in setup controller and it is important during first initializing a controller.
+    </div>
+
+
+
+  </div><!-- row -->
+
+  <div class="row">
+
+    <div class="col-md-4">
+      <h2>Custom search</h2>
+
+      <h3>Changing <code>searchKey</code> property</h3>
+
+      You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
+
+      <pre>
+      &#123;{ember-select-guru
+        value=singleValue
+        options=options
+        <strong>searchKey='description'</strong>
+        onSelect=(action "handleSingleSelect")}}
+      </pre>
+    </div>
+
+    <div class="col-md-8">
+
+      We decided to search by the options <code>description</code> attribute. The options we have are as follows:
+
+      <pre>
+      [
+        {
+          name: '123',
+          description: 'one hundred twenty-three'
+        },
+        {
+          name: '456',
+          description: 'four hundred fifty-six'
+        },
+        {
+          name: '758',
+          description: 'seven hundred fifty-eight'
+        }
+      ]
+      </pre>
+
+      {{ember-select-guru
+        value=singleValue
+        options=options
+        searchKey='description'
+        onSelect=(action "handleSingleSelect")}}
+
+      <h3>Providing your own search mechanism</h3>
+
+      You can provide your own handler for when the value of search input changes. This handler needs to return either an array, or a promise that will return an array. If it doesn't return anything, the default behaviour will apply.
+
+      <h4>Returning an array</h4>
+
+      We will filter the numbers and return only those that are bigger than the number in search input.
+
+      <pre>
+      &#123;{ember-select-guru
+        value=singleValue
+        options=options
+        <strong>onSearchInputChange=(action "customSearchInputChange")</strong>
+        onSelect=(action "handleSingleSelect")}}
+      </pre>
+
+      <pre>
+        actions: {
+          customSearchInputChange(queryTerm) {
+            const options = this.get('options');
+            const number = parseInt(queryTerm, 10);
+            if(queryTerm == '') {
+              return options;
+            }
+            if(isNaN(number)) {
+              return Ember.A();
+            }
+            return options.filter((item) => {
+              return parseInt(item.get('name'), 10) > number;
+            });
+          }
+        }
+      </pre>
+
+      {{ember-select-guru
+        value=singleValue
+        options=options
+        onSearchInputChange=(action "customSearchInputChange")
+        onSelect=(action "handleSingleSelect")}}
+
+      </div>
+
   </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Remote single selection</h2>
+      <p>Remote single selection works the same as the former ones, except you need to return promise that is fetching your data from <code>onSearchInputChange</code> action. ember-select-guru will chain a callback on that promise and enter the <code>pending</code> state waiting for your data. Your job is to wait for that promise and eventually obtain the data from remote endpoint. When the promise resolves, you should copy the result data from the promise to the <code>options</code> binidng. Thanks to Ember Run Loop mechanism, the component will go back from <code>pending</code> state to normal state and accept your new data in options in the same moment.</p>
+      <p>Take a look at this example:</p>
+      {{ember-select-guru
+        value=remoteValue
+        options=remoteOptions
+        onSearchInputChange=(action "remoteQueryTermChanged")
+        onSelect=(action "handleRemoteSelect")}}
+      </div>
+      <div class="col-md-8">
+        <p>Your template should look like this:</p>
+        <pre>
+          &#123;{ember-select-guru
+            value=value
+            options=options
+            onSearchInputChange=(action "queryTermChanged")
+            onSelect=(action "handleSelect")}}
+        </pre>
+        <p>Remember, that ember-select-guru has no two-way data binding. Handle <code>onSelect</code> properly by setting <code>value</code> with proper arguments. Your controller code should look like this:</p>
+        <pre>
+          actions: {
+            queryTermChanged(queryTerm) {
+              // remember to return the result of store query or any other Promise
+              return this.store.query('user', { q: queryTerm }).then((result) => {
+                // -- you must explicitly set `options` binded to component in the fetching callback
+                this.set('options', result.toArray());
+              });
+            },
+            handleRemoteSelect(option) {
+              // -- option is single object instance in regular mode (no multiple)
+              // -- in multiple mode, it would be array of objects
+              this.set('value', option);
+            }
+          }
+        </pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Customizing components</h2>
+      You can customize each <code>ember-select-guru</code> element by define your own components.
+      {{ember-select-guru
+        value=singleValue
+        options=options
+        optionComponent='list-item'
+        singleValueComponent='single-selected'
+
+        onSearchInputChange=(action "queryTermChanged")
+        onSelect=(action "handleSingleSelect")}}
+    </div>
+
+    <div class="col-md-8">
+      <pre>
+        &#123;{ember-select-guru
+          value=singleValue
+          options=options
+          optionComponent='list-item'
+          singleValueComponent='single-selected'
+
+          onSearchInputChange=(action "queryTermChanged")
+          onSelect=(action "handleSingleSelect")}}
+      </pre>
+
+      In this case we have two custom components: <code>list-item</code> and <code>single-selected</code>. In addition <code>list-item</code> consists <code>x-gravatar</code> component, so we can pass components with nested components as well.
+    </div>
+  </div>
+
 </div>
 
-<h2>Customizing components</h2>
-
-You can customize each <code>ember-select-guru</code> element by define your own components.
-
-<pre>
-  &#123;{ember-select-guru
-    value=singleValue
-    options=options
-    optionComponent='list-item'
-    singleValueComponent='single-selected'
-
-    onSearchInputChange=(action "queryTermChanged")
-    onSelect=(action "handleSingleSelect")}}
-</pre>
-
-In this case we have two custom components: <code>list-item</code> and <code>single-selected</code>. In addition <code>list-item</code>
-consists <code>x-gravatar</code> component, so we can pass components with nested components as well.
-
-{{ember-select-guru
-  value=singleValue
-  options=options
-  optionComponent='list-item'
-  singleValueComponent='single-selected'
-
-  onSearchInputChange=(action "queryTermChanged")
-  onSelect=(action "handleSingleSelect")}}
