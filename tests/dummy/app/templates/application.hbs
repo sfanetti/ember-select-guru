@@ -1,5 +1,6 @@
-<h2 id="title">ember-select-guru</h2>
+<h1 id="title">ember-select-guru</h1>
 
+<h2>Examples</h2>
 <p>Single</p>
 {{ember-select-guru
   value=singleValue
@@ -27,7 +28,7 @@ Below is a example code of component embedded in a template:
   onSelect=(action "handleMultiSelect")
   multiple=true}}
 </pre>
-You can pass through `options` an array of objects which serves data.
+You can pass through <code>options</code> an array of objects which serves data.
 
 The controller requires the action such as
 <pre>
@@ -35,7 +36,7 @@ handleMultiSelect(options) {
   this.set('multipleValue', options);
 }
 </pre>
-and don't forgot about setting `multipleValue` as an empty array. It could be done in setup controller and it is important during first initializing a controller.
+and don't forgot about setting <code>multipleValue</code> as an empty array. It could be done in setup controller and it is important during first initializing a controller.
 
 <h2>Custom search</h2>
 
@@ -118,8 +119,8 @@ We will filter the numbers and return only those that are bigger than the number
 
 <div class="row">
   <div class="col-md-12">
-    <h3>Remote single selection</h3>
-    <p>Remote single selection works the same as the former ones, except you need to return promise that is fetching your data from `onSearchInputChange` action. ember-select-guru will chain a callback on that promise and enter the `pending` state waiting for your data. Your job is to wait for that promise and eventually obtain the data from remote endpoint. When the promise resolves, you should copy the result data from the promise to the `options` binidng. Thanks to Ember Run Loop mechanism, the component will go back from `pending` state to normal state and accept your new data in options in the same moment.</p>
+    <h4>Remote single selection</h4>
+    <p>Remote single selection works the same as the former ones, except you need to return promise that is fetching your data from <code>onSearchInputChange</code> action. ember-select-guru will chain a callback on that promise and enter the <code>pending</code> state waiting for your data. Your job is to wait for that promise and eventually obtain the data from remote endpoint. When the promise resolves, you should copy the result data from the promise to the <code>options</code> binidng. Thanks to Ember Run Loop mechanism, the component will go back from <code>pending</code> state to normal state and accept your new data in options in the same moment.</p>
     <p>Take a look at this example:</p>
     {{ember-select-guru
       value=remoteValue
@@ -128,13 +129,13 @@ We will filter the numbers and return only those that are bigger than the number
       onSelect=(action "handleRemoteSelect")}}
     <p>Your template should look like this:</p>
     <pre>
-      { {ember-select-guru
+      &#123;{ember-select-guru
         value=value
         options=options
         onSearchInputChange=(action "queryTermChanged")
         onSelect=(action "handleSelect")}}
     </pre>
-    <p>Remember, that ember-select-guru has no two-way data binding. Handle `onSelect` properly by setting `value` with proper arguments. Your controller code should look like this:</p>
+    <p>Remember, that ember-select-guru has no two-way data binding. Handle <code>onSelect</code> properly by setting <code>value</code> with proper arguments. Your controller code should look like this:</p>
     <pre>
       actions: {
         queryTermChanged(queryTerm) {
