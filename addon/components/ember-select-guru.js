@@ -101,6 +101,29 @@ export default Component.extend({
   _resetCurrentHighlight() {
     this.set('currentHighlight', 0);
   },
+  _handleKeyDown(event) {
+    console.log(event.keyCode);
+    switch(event.keyCode) {
+      case 27:
+        this.set('isExpanded', false);
+        return;
+      case 40:
+        if((this.get('currentHighlight') - 1) == this.get('_options.length')) { return; }
+        this.incrementProperty('currentHighlight');
+        return;
+      case 38:
+        if(this.get('currentHighlight') == 0) { return; }
+        this.decrementProperty('currentHighlight');
+        return;
+      case 13:
+        const option = this.get('_options')[this.get('currentHighlight')];
+        this.send('onOptionClick', option);
+        this.set('isExpanded', false);
+        return;
+      default:
+        return;
+    }
+  },
   _handleAttrsChange() {
     let possibleOptions = [], availableOptions = this.get('options');
 
