@@ -15,7 +15,7 @@ export default Controller.extend({
     Ember.Object.create({
       name: '758',
       description: 'seven hundred fifty-eight'
-    })
+    }),
   ]),
   multipleValue: Ember.A([]),
   actions: {

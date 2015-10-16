@@ -7,13 +7,35 @@
   onSearchInputChange=(action "queryTermChanged")
   onSelect=(action "handleSingleSelect")}}
 
-<p>Multiple</p>
+<h2>Multiple</h2>
+ember-select-guru allows you to choose multiple items from a defined object in controller. Also, you can remove any item from the list.
+
 {{ember-select-guru
   value=multipleValue
   options=options
   onSearchInputChange=(action "queryTermChanged")
   onSelect=(action "handleMultiSelect")
   multiple=true}}
+
+<p>Example</p>
+Below is a example code of component embedded in a template:
+<pre>
+&#123;&#123;ember-select-guru
+  value=multipleValue
+  options=options
+  onSearchInputChange=(action "queryTermChanged")
+  onSelect=(action "handleMultiSelect")
+  multiple=true}}
+</pre>
+You can pass through `options` an array of objects which serves data.
+
+The controller requires the action such as
+<pre>
+handleMultiSelect(options) {
+  this.set('multipleValue', options);
+}
+</pre>
+and don't forgot about setting `multipleValue` as an empty array. It could be done in setup controller and it is important during first initializing a controller.
 
 <p>Remote</p>
 {{ember-select-guru
