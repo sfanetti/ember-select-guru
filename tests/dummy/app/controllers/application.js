@@ -17,6 +17,20 @@ export default Controller.extend({
       description: 'seven hundred fifty-eight'
     }),
   ]),
+  colorOptions: Ember.A([
+    Ember.Object.create({
+      name: 'red',
+      color: '#f00'
+    }),
+    Ember.Object.create({
+      name: 'green',
+      color: '#0f0'
+    }),
+    Ember.Object.create({
+      name: 'blue',
+      color: '#00f'
+    })
+  ]),
   multipleValue: Ember.A([]),
   actions: {
     queryTermChanged(queryTerm) {
