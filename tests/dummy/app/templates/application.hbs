@@ -4,26 +4,27 @@
     <ul class="sidebar-nav">
       <h1 id="title" class="sidebar-brand">ember-select-guru</h1>
       <li>
-        <a href="#why">Why?</a>
+        <a href="#single">Single selection</a>
       </li>
       <li>
-        <a href="#features">Features</a>
+        <a href="#multiple">Multiple selection</a>
       </li>
       <li>
-        <a href="#use_cases">Use cases</a>
+        <a href="#search">Custom search</a>
       </li>
       <li>
-        <a href="#api">API</a>
+        <a href="#remote">Remote selection</a>
+      </li>
+      <li>
+        <a href="#components">Customizing components</a>
       </li>
     </ul>
   </div>
   <div id="page-content-wrapper">
     <div class="container-fluid">
-      <h2 id="why">Why?</h2>
-      <h2 id="features">Features</h2>
-      <div class="row">
+      <div class="row" id="single">
         <div class="col-md-4">
-          <h2>Single</h2>
+          <h2>Single selection</h2>
           <p>Using this component you can make a select box with a dynamic search input.</p>
           {{ember-select-guru
             value=singleValue
@@ -50,9 +51,9 @@
           {{/ember-highlight-code}}
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="multiple">
         <div class="col-md-4">
-          <h2>Multiple</h2>
+          <h2>Multiple selection</h2>
           <p>ember-select-guru allows you to choose multiple items from a defined object in controller. Also, you can remove any item from the list.</p>
           {{ember-select-guru
           value=multipleValue
@@ -82,10 +83,10 @@
         </div>
       </div>
       <!-- row -->
-      <div class="row">
+      <div class="row" id="search">
         <div class="col-md-4">
           <h2>Custom search</h2>
-          <h3>Changing <code>searchKey</code> property</h3>
+          <h4>Changing <code>searchKey</code> property</h4>
           You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
           {{#ember-highlight-code language="handlebars"}}
             \{{ember-select-guru
@@ -156,7 +157,7 @@
           onSelect=(action "handleSingleSelect")}}
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="remote">
         <div class="col-md-4">
           <h2>Remote single selection</h2>
           <p>Remote single selection works the same as the former ones, except you need to return promise that is fetching your data from <code>onSearchInputChange</code> action. ember-select-guru will chain a callback on that promise and enter the <code>pending</code> state waiting for your data. Your job is to wait for that promise and eventually obtain the data from remote endpoint. When the promise resolves, you should copy the result data from the promise to the <code>options</code> binidng. Thanks to Ember Run Loop mechanism, the component will go back from <code>pending</code> state to normal state and accept your new data in options in the same moment.</p>
@@ -197,7 +198,7 @@
           {{/ember-highlight-code}}
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="components">
         <div class="col-md-4">
           <h2>Customizing components</h2>
           You can customize each <code>ember-select-guru</code> element by define your own components.
@@ -225,7 +226,5 @@
         </div>
       </div>
     </div>
-    <h2 id="use_cases">Use cases</h2>
-    <h2 id="api">API</h2>
   </div>
 </div>
