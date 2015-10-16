@@ -33,7 +33,8 @@ export default Component.extend({
       const result = this.attrs.onSearchInputChange && this.attrs.onSearchInputChange(this.get('queryTerm'));
       if(result == undefined || result == null) {
         // handle if result is undefined (internal search)
-        if(!this.get('queryTerm')) { return this._handleAttrsChange(); }
+        this._handleAttrsChange();
+        if(!this.get('queryTerm')) { return; }
         const possibleOptions = this._searchForOptions();
         this.set('_options', possibleOptions);
       } else if('function' === typeof result.then) {
@@ -88,13 +89,8 @@ export default Component.extend({
     this.set('name', `select-guru-${this.get('elementId')}`);
   },
   _handleAttrsChange() {
-    let possibleOptions = [], availableOptions = [];
+    let possibleOptions = [], availableOptions = this.get('options');
 
-    if(this.get('queryTerm') && !this.get('_remoteData')) {
-      availableOptions = this.get('_options');
-    } else {
-      availableOptions = this.get('options');
-    }
     if(this.get('multiple')) {
       possibleOptions = difference(availableOptions, this.get('value'));
     } else {
