@@ -75,6 +75,7 @@ export default Component.extend({
       this.attrs.onSelect(this.get('_value'));
     },
     expandComponent() {
+      if(!this.get('isExpanded')) { this._resetCurrentHighlight(); }
       this.set('isExpanded', true);
       this.set('queryTerm', '');
       run.schedule('afterRender', this, function() {
@@ -90,6 +91,15 @@ export default Component.extend({
     this._handleAttrsChange();
     this.set('attachTo', `#${this.get('elementId')}`);
     this.set('name', `select-guru-${this.get('elementId')}`);
+  },
+  didInsertElement() {
+    this.$().bind('keydown', Ember.run.bind(this, this._handleKeyDown));
+  },
+  willDestroyElement() {
+    this.$().unbind('keydown');
+  },
+  _resetCurrentHighlight() {
+    this.set('currentHighlight', 0);
   },
   _handleAttrsChange() {
     let possibleOptions = [], availableOptions = this.get('options');

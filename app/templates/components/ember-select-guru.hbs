@@ -30,8 +30,8 @@
         {{else}} {{#if hasFailed}}
           {{component failureComponent}}
         {{else}} {{#if hasOptions}}
-          {{#each _options as |option|}}
-            {{component optionComponent option=option onClick=(action "onOptionClick")}}
+          {{#each _options as |option index|}}
+            {{component optionComponent option=option onClick=(action "onOptionClick") currentHighlight=currentHighlight index=index}}
           {{/each}}
         {{else}}
           {{component noOptionsComponent}}
