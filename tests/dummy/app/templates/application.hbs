@@ -10,7 +10,10 @@
         <a href="#multiple">Multiple selection</a>
       </li>
       <li>
-        <a href="#search">Custom search</a>
+      <a href="#search-key"><code>searchKey</code> property</a>
+      </li>
+      <li>
+        <a href="#search-array">Custom search</a>
       </li>
       <li>
         <a href="#remote">Remote selection</a>
@@ -85,18 +88,17 @@
       </div>
       <hr />
       <!-- row -->
-      <div class="row" id="search">
+      <div class="row" id="search-key">
         <div class="col-md-4">
-          <h2>Custom search</h2>
-          <h4>Changing <code>searchKey</code> property</h4>
-          You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
-          {{#ember-highlight-code language="handlebars"}}
-            \{{ember-select-guru
-              value=singleValue
-              options=options
-              <strong>searchKey='description'</strong>
-              onSelect=(action "handleSingleSelect")}}
-          {{/ember-highlight-code}}
+          <h2><code>searchKey</code> property</h2>
+
+          You can easily change the attribute used for searching. Try typing "fifty" into the field below.
+
+          {{ember-select-guru
+          value=singleValue
+          options=options
+          searchKey='description'
+          onSelect=(action "handleSingleSelect")}}
         </div>
         <div class="col-md-8">
           We decided to search by the options <code>description</code> attribute. The options we have are as follows:
@@ -117,15 +119,47 @@
             ]
           {{/ember-highlight-code}}
 
-          {{ember-select-guru
-          value=singleValue
-          options=options
-          searchKey='description'
-          onSelect=(action "handleSingleSelect")}}
-          <h3>Providing your own search mechanism</h3>
-          You can provide your own handler for when the value of search input changes. This handler needs to return either an array, or a promise that will return an array. If it doesn't return anything, the default behaviour will apply.
-          <h4>Returning an array</h4>
+          You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
+
+          {{#ember-highlight-code language="handlebars"}}
+            \{{ember-select-guru
+              value=singleValue
+              options=options
+              <strong>searchKey='description'</strong>
+              onSelect=(action "handleSingleSelect")}}
+          {{/ember-highlight-code}}
+        </div>
+      </div>
+      <hr>
+      <div class="row" id="search-array">
+        <div class="col-md-4">
+          <h2>Custom search</h2>
           We will filter the numbers and return only those that are bigger than the number in search input.
+          {{ember-select-guru
+            value=singleValue
+            options=options
+            onSearchInputChange=(action "customSearchInputChange")
+            onSelect=(action "handleSingleSelect")}}
+        </div>
+        <div class="col-md-8">
+          {{#ember-highlight-code language="javascript"}}
+            actions: {
+              customSearchInputChange(queryTerm) {
+                const options = this.get('options');
+                const number = parseInt(queryTerm, 10);
+                if(queryTerm == '') {
+                  return options;
+                }
+                if(isNaN(number)) {
+                  return Ember.A();
+                }
+                return options.filter((item) => {
+                  return parseInt(item.get('name'), 10) > number;
+                });
+              }
+            }
+          {{/ember-highlight-code}}
+
           {{#ember-highlight-code language="handlebars"}}
             \{{ember-select-guru
               value=singleValue
@@ -133,30 +167,6 @@
               <strong>onSearchInputChange=(action "customSearchInputChange")</strong>
               onSelect=(action "handleSingleSelect")}}
           {{/ember-highlight-code}}
-
-        {{#ember-highlight-code language="javascript"}}
-          actions: {
-            customSearchInputChange(queryTerm) {
-              const options = this.get('options');
-              const number = parseInt(queryTerm, 10);
-              if(queryTerm == '') {
-                return options;
-              }
-              if(isNaN(number)) {
-                return Ember.A();
-              }
-              return options.filter((item) => {
-                return parseInt(item.get('name'), 10) > number;
-              });
-            }
-          }
-        {{/ember-highlight-code}}
-
-          {{ember-select-guru
-          value=singleValue
-          options=options
-          onSearchInputChange=(action "customSearchInputChange")
-          onSelect=(action "handleSingleSelect")}}
         </div>
       </div>
       <hr />
