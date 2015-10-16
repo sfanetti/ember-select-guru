@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-8">
           <p>First you need to configure a controller action bound to <code>onSelect</code> event.</p>
-          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+          {{#ember-highlight-code language="javascript"}}
             actions: {
               queryTermChanged(queryTerm) {
                 console.log(queryTerm)
@@ -41,13 +41,13 @@
             }
           {{/ember-highlight-code}}
           <p>The single select box template is declared using <code>singeValue</code> attribute as a component value.</p>
-          <pre>
-            &#123;{ember-select-guru
+          {{#ember-highlight-code language="handlebars"}}
+            \{{ember-select-guru
               value=singleValue
               options=options
               onSearchInputChange=(action "queryTermChanged")
               onSelect=(action "handleSingleSelect")}}
-          </pre>
+          {{/ember-highlight-code}}
         </div>
       </div>
       <div class="row">
@@ -63,17 +63,17 @@
         </div>
         <div class="col-md-8">
           Example code of component embedded in a template:
-          <pre>
-                &#123;&#123;ember-select-guru
-                  value=multipleValue
-                  options=options
-                  onSearchInputChange=(action "queryTermChanged")
-                  onSelect=(action "handleMultiSelect")
-                  multiple=true}}
-                </pre>
+          {{#ember-highlight-code language="handlebars"}}
+            \{{ember-select-guru
+              value=multipleValue
+              options=options
+              onSearchInputChange=(action "queryTermChanged")
+              onSelect=(action "handleMultiSelect")
+              multiple=true}}
+          {{/ember-highlight-code}}
           You can pass through <code>options</code> an array of objects which serves data.
           The controller requires the action such as
-          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+          {{#ember-highlight-code language="javascript"}}
             handleMultiSelect(options) {
               this.set('multipleValue', options);
             }
@@ -87,17 +87,17 @@
           <h2>Custom search</h2>
           <h3>Changing <code>searchKey</code> property</h3>
           You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
-          <pre>
-                        &#123;{ember-select-guru
-                          value=singleValue
-                          options=options
-                          <strong>searchKey='description'</strong>
-                          onSelect=(action "handleSingleSelect")}}
-                        </pre>
+          {{#ember-highlight-code language="handlebars"}}
+            \{{ember-select-guru
+              value=singleValue
+              options=options
+              <strong>searchKey='description'</strong>
+              onSelect=(action "handleSingleSelect")}}
+          {{/ember-highlight-code}}
         </div>
         <div class="col-md-8">
           We decided to search by the options <code>description</code> attribute. The options we have are as follows:
-          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+          {{#ember-highlight-code language="javascript"}}
             [
               {
                 name: '123',
@@ -123,15 +123,15 @@
           You can provide your own handler for when the value of search input changes. This handler needs to return either an array, or a promise that will return an array. If it doesn't return anything, the default behaviour will apply.
           <h4>Returning an array</h4>
           We will filter the numbers and return only those that are bigger than the number in search input.
-          <pre>
-      &#123;{ember-select-guru
-        value=singleValue
-        options=options
-        <strong>onSearchInputChange=(action "customSearchInputChange")</strong>
-        onSelect=(action "handleSingleSelect")}}
-</pre>
+          {{#ember-highlight-code language="handlebars"}}
+            \{{ember-select-guru
+              value=singleValue
+              options=options
+              <strong>onSearchInputChange=(action "customSearchInputChange")</strong>
+              onSelect=(action "handleSingleSelect")}}
+          {{/ember-highlight-code}}
 
-        {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+        {{#ember-highlight-code language="javascript"}}
           actions: {
             customSearchInputChange(queryTerm) {
               const options = this.get('options');
@@ -169,15 +169,17 @@
         </div>
         <div class="col-md-8">
           <p>Your template should look like this:</p>
-          <pre>
-          &#123;{ember-select-guru
-            value=value
-            options=options
-            onSearchInputChange=(action "queryTermChanged")
-            onSelect=(action "handleSelect")}}
-</pre>
+
+          {{#ember-highlight-code language="handlebars"}}
+            \{{ember-select-guru
+              value=value
+              options=options
+              onSearchInputChange=(action "queryTermChanged")
+              onSelect=(action "handleSelect")}}
+          {{/ember-highlight-code}}
+
           <p>Remember, that ember-select-guru has no two-way data binding. Handle <code>onSelect</code> properly by setting <code>value</code> with proper arguments. Your controller code should look like this:</p>
-          {{#ember-highlight-code language="javascript" addLineNumbers=true}}
+          {{#ember-highlight-code language="javascript"}}
             actions: {
               queryTermChanged(queryTerm) {
                 // remember to return the result of store query or any other Promise
@@ -208,15 +210,17 @@
           onSelect=(action "handleSingleSelect")}}
         </div>
         <div class="col-md-8">
-          <pre>
-        &#123;{ember-select-guru
-          value=singleValue
-          options=options
-          optionComponent='list-item'
-          singleValueComponent='single-selected'
-          onSearchInputChange=(action "queryTermChanged")
-          onSelect=(action "handleSingleSelect")}}
-</pre>
+
+          {{#ember-highlight-code language="handlebars"}}
+            \{{ember-select-guru
+              value=singleValue
+              options=options
+              optionComponent='list-item'
+              singleValueComponent='single-selected'
+              onSearchInputChange=(action "queryTermChanged")
+              onSelect=(action "handleSingleSelect")}}
+          {{/ember-highlight-code}}
+
           In this case we have two custom components: <code>list-item</code> and <code>single-selected</code>. In addition <code>list-item</code> consists <code>x-gravatar</code> component, so we can pass components with nested components as well.
         </div>
       </div>
