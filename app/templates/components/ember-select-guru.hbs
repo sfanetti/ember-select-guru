@@ -17,9 +17,6 @@
     <div class="expanded-list">
       {{#if multiple}}
         <div class="multiple-value-selector">
-          {{#each value as |selectedValue|}}
-            {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
-          {{/each}}
           {{input placeholder=searchPlaceholder value=queryTerm class='ember-select-guru-search'}}
         </div>
       {{else}}
