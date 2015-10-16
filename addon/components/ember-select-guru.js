@@ -30,8 +30,8 @@ export default Component.extend({
         hasFailed: false,
         remoteData: false,
       });
-      const result = this.attrs.onSearchInputChange(this.get('queryTerm'));
-      if(result == null) {
+      const result = this.attrs.onSearchInputChange && this.attrs.onSearchInputChange(this.get('queryTerm'));
+      if(result == undefined || result == null) {
         // handle if result is undefined (internal search)
         if(!this.get('queryTerm')) { return this._handleAttrsChange(); }
         const possibleOptions = this._searchForOptions();
