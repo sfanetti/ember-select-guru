@@ -4,7 +4,7 @@ const { computed, run } = Ember;
 
 export default Ember.Component.extend({
   clickOutEventNamespace: 'el-popup',
-  classNames: 'el-tether',
+  classNames: 'ember-select-guru__dropdown',
 
   didInsertElement: function() {
     Ember.$(document).bind(
@@ -25,9 +25,9 @@ export default Ember.Component.extend({
   },
 
   clickoutHandler: function(event) {
-    if((this.$().parent().children('.value-wrapper').has(event.target).length > 0) ||
-       (this.$().parent().children('.value-wrapper')[0] === event.target) ||
-       (this.$('input.ember-select-guru-search')[0] === event.target)) {
+    if((this.$().parent().children('.ember-select-guru__trigger').has(event.target).length > 0) ||
+       (this.$().parent().children('.ember-select-guru__trigger')[0] === event.target) ||
+       (this.$('input.ember-select-guru__search')[0] === event.target)) {
       return;
     } else {
       run(() => { this._willHideDropdown(); });

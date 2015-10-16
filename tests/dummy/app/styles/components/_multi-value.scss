@@ -1,0 +1,24 @@
+.multi-value {
+
+  &__option {
+    display: inline-block;
+    margin-bottom: $base - 2;
+    padding: 3.5px $base 1px $base;
+    border-radius: 5px;
+    border: solid 1px $border;
+    background: $background;
+  }
+
+  &__selected {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__remove {
+
+    &:hover {
+      color: $red;
+    }
+  }
+}
