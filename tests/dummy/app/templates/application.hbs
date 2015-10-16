@@ -21,3 +21,42 @@
   options=remoteOptions
   onSearchInputChange=(action "remoteQueryTermChanged")
   onSelect=(action "handleRemoteSelect")}}
+
+<h2>Custom search</h2>
+
+You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
+
+<pre>
+&#123;{ember-select-guru
+  value=singleValue
+  options=options
+  <strong>searchKey='description'</strong>
+  onSearchInputChange=(action "queryTermChanged")
+  onSelect=(action "handleSingleSelect")}}
+</pre>
+
+We decided to search by the options <code>description</code> attribute. The options we have are as follows:
+
+<pre>
+[
+  {
+    name: '123',
+    description: 'one hundred twenty-three'
+  },
+  {
+    name: '456',
+    description: 'four hundred fifty-six'
+  },
+  {
+    name: '758',
+    description: 'seven hundred fifty-eight'
+  }
+]
+</pre>
+
+{{ember-select-guru
+  value=singleValue
+  options=options
+  searchKey='description'
+  onSearchInputChange=(action "queryTermChanged")
+  onSelect=(action "handleSingleSelect")}}

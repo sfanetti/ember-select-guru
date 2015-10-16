@@ -5,13 +5,16 @@ const { Controller } = Ember;
 export default Controller.extend({
   options: Ember.A([
     Ember.Object.create({
-      name: '123'
+      name: '123',
+      description: 'one hundred twenty-three'
     }),
     Ember.Object.create({
-      name: '456'
+      name: '456',
+      description: 'four hundred fifty-six'
     }),
     Ember.Object.create({
-      name: '758'
+      name: '758',
+      description: 'seven hundred fifty-eight'
     })
   ]),
   multipleValue: Ember.A([]),
