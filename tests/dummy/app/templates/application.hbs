@@ -46,6 +46,8 @@ and don't forgot about setting `multipleValue` as an empty array. It could be do
 
 <h2>Custom search</h2>
 
+<h3>Changing <code>searchKey</code> property</h3>
+
 You can change the attribute that is used for filtering options by providing a value for the <code>searchKey</code> property.
 
 <pre>
@@ -53,7 +55,6 @@ You can change the attribute that is used for filtering options by providing a v
   value=singleValue
   options=options
   <strong>searchKey='description'</strong>
-  onSearchInputChange=(action "queryTermChanged")
   onSelect=(action "handleSingleSelect")}}
 </pre>
 
@@ -80,5 +81,44 @@ We decided to search by the options <code>description</code> attribute. The opti
   value=singleValue
   options=options
   searchKey='description'
-  onSearchInputChange=(action "queryTermChanged")
+  onSelect=(action "handleSingleSelect")}}
+
+<h3>Providing your own search mechanism</h3>
+
+You can provide your own handler for when the value of search input changes. This handler needs to return either an array, or a promise that will return an array. If it doesn't return anything, the default behaviour will apply.
+
+<h4>Returning an array</h4>
+
+We will filter the numbers and return only those that are bigger than the number in search input.
+
+<pre>
+&#123;{ember-select-guru
+  value=singleValue
+  options=options
+  <strong>onSearchInputChange=(action "customSearchInputChange")</strong>
+  onSelect=(action "handleSingleSelect")}}
+</pre>
+
+<pre>
+  actions: {
+    customSearchInputChange(queryTerm) {
+      const options = this.get('options');
+      const number = parseInt(queryTerm, 10);
+      if(queryTerm == '') {
+        return options;
+      }
+      if(isNaN(number)) {
+        return Ember.A();
+      }
+      return options.filter((item) => {
+        return parseInt(item.get('name'), 10) > number;
+      });
+    }
+  }
+</pre>
+
+{{ember-select-guru
+  value=singleValue
+  options=options
+  onSearchInputChange=(action "customSearchInputChange")
   onSelect=(action "handleSingleSelect")}}

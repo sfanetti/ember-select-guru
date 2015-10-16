@@ -35,6 +35,19 @@ export default Controller.extend({
     },
     handleRemoteSelect(option) {
       this.set('remoteValue', option);
+    },
+    customSearchInputChange(queryTerm) {
+      const options = this.get('options');
+      const number = parseInt(queryTerm, 10);
+      if(queryTerm == '') {
+        return options;
+      }
+      if(isNaN(number)) {
+        return Ember.A();
+      }
+      return options.filter((item) => {
+        return parseInt(item.get('name'), 10) > number;
+      });
     }
   }
 });
