@@ -227,23 +227,21 @@
         <div class="col-md-4">
           <p>You can customize each <code>ember-select-guru</code> element by define your own components.</p>
           {{ember-select-guru
-          value=singleValue
+          value=colorValue
           options=colorOptions
           optionComponent='list-item'
           singleValueComponent='color-selected'
-          onSearchInputChange=(action "queryTermChanged")
-          onSelect=(action "handleSingleSelect")}}
+          onSelect=(action "handleColorSelect")}}
         </div>
         <div class="col-md-8">
 
           {{#ember-highlight-code language="handlebars"}}
             \{{ember-select-guru
-              value=singleValue
+              value=colorValue
               options=colorOptions
               optionComponent='list-item'
               singleValueComponent='color-selected'
-              onSearchInputChange=(action "queryTermChanged")
-              onSelect=(action "handleSingleSelect")}}
+              onSelect=(action "handleColorSelect")}}
           {{/ember-highlight-code}}
 
           <p>In this case we have two custom components: <code>list-item</code> and <code>single-selected</code>. In addition <code>list-item</code> consists <code>x-gravatar</code> component, so we can pass components with nested components as well.</p>

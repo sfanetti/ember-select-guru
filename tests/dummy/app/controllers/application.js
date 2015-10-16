@@ -39,6 +39,9 @@ export default Controller.extend({
     handleSingleSelect(option) {
       this.set('singleValue', option);
     },
+    handleColorSelect(option) {
+      this.set('colorValue', option);
+    },
     handleMultiSelect(options) {
       this.set('multipleValue', options);
     },
