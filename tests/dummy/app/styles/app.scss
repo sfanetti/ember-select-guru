@@ -1,4 +1,7 @@
-@import "bootstrap";
+@import 'bootstrap';
+@import 'variables';
+@import 'components/ember-select-guru';
+@import 'components/multi-value';
 
 $main-color: #cececf;
 $secondary-color: #dfd3ae;
@@ -97,6 +100,10 @@ $highlight-color: #f5e9c4;
     background: none;
 }
 
+hr {
+  margin: $base * 12 0;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
@@ -124,7 +131,3 @@ $highlight-color: #f5e9c4;
         margin-right: 0;
     }
 }
-
-@import 'variables';
-@import 'components/ember-select-guru';
-@import 'components/multi-value';
