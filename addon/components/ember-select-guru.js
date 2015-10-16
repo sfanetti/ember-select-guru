@@ -3,7 +3,7 @@ import Ember from 'ember';
 import intersection from 'npm:lodash/array/intersection';
 import difference from 'npm:lodash/array/difference';
 
-const { Component, computed, observer, get } = Ember;
+const { Component, computed, observer, get, run } = Ember;
 
 export default Component.extend({
   isPending: false,
@@ -77,6 +77,9 @@ export default Component.extend({
     expandComponent() {
       this.set('isExpanded', true);
       this.set('queryTerm', '');
+      run.schedule('afterRender', this, function() {
+        this.$('input').focus();
+      });
     },
     willHideDropdown() {
       this.set('isExpanded', false);
