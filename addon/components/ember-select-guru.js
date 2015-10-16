@@ -102,13 +102,12 @@ export default Component.extend({
     this.set('currentHighlight', 0);
   },
   _handleKeyDown(event) {
-    console.log(event.keyCode);
     switch(event.keyCode) {
       case 27:
         this.set('isExpanded', false);
         return;
       case 40:
-        if((this.get('currentHighlight') - 1) == this.get('_options.length')) { return; }
+        if((this.get('currentHighlight') + 1) >= this.get('_options').length) { return; }
         this.incrementProperty('currentHighlight');
         return;
       case 38:
