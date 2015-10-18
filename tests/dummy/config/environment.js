@@ -40,8 +40,8 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
-
+  if (environment === 'github') {
+    ENV.baseURL = '/ember-select-guru'
   }
 
   return ENV;
