@@ -225,3 +225,50 @@ test('it sends #onSelect action with proper values set on remove value click', f
   assert.equal(onSelectSpyCall.args[0][0], options[1], '#onSelect should be called with one selected value');
 });
 
+test('it let\'s control component by keyboard', function(assert) {
+  assert.expect(7);
+
+  const options = [{ name: 'ABC' }, { name: 'ABCD' }, { name: 'ABCDE' }];
+
+  this.setProperties({
+    options,
+    actions: {}
+  });
+
+  this.set('actions.queryTermChanged', () => { return null; });
+  this.set('actions.onSelect', (value) => { this.set('value', value); });
+
+  const onSelectSpy = sinon.spy(this.get('actions'), 'onSelect');
+
+  this.render(
+    hbs('{{ember-select-guru value=value options=options onSearchInputChange=(action "queryTermChanged") onSelect=(action "onSelect")}}')
+  );
+
+  this.$('.ember-select-guru__trigger').click();
+
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
+  assert.ok(Ember.$('.options-wrapper div:first').hasClass('is-active'), 'initially first element should be active');
+
+  let event = Ember.$.Event('keydown');
+  event.keyCode = 40;
+  this.$('.ember-select-guru').trigger(event);
+
+  assert.ok(Ember.$('.options-wrapper div:nth-child(2)').hasClass('is-active'), 'after keypress second element should be active');
+
+  event.keyCode = 13;
+  this.$('.ember-select-guru').trigger(event);
+
+  assert.equal(Ember.$('.ember-select-guru__dropdown').length, 0, 'dropdown should hide');
+  const onSelectSpyCall = onSelectSpy.getCall(0);
+  assert.equal(onSelectSpyCall.args[0], options[1], '#onSelect should be called with selected value');
+
+  this.$('.ember-select-guru__trigger').click();
+
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
+
+  event.keyCode = 27;
+  this.$('.ember-select-guru').trigger(event);
+
+  assert.equal(Ember.$('.ember-select-guru__dropdown').length, 0, 'dropdown should hide');
+});
+
