@@ -3,6 +3,8 @@ Select component inspired by jQuery Select2, but natively implemented in Emberjs
 
 ember-select-guru main advantage over other Select2 wrappers is it's native implementation. It fully supports Ember 2.0 architecture, using one-way data bindings, dynamic components and closure actions. Thanks to structurized data flow it let's you easily cover nearly any use case, wrapped in Ember Run Loop.
 
+[Check out live demo here.](https://netguru.github.io/ember-select-guru/)
+
 ## Installation
 ember-select-guru is shipped as ember-cli addon and can be easily installed using:
 ```
@@ -113,7 +115,7 @@ ember-select-guru will render the results based on the array you retrurned. You 
 ### <a name="components"></a>Dynamic components
 Due to fact that ember-select-guru is natively developed in Emberjs, it is constructed from components. As a user, you can provide your own components to use by ember-select-guru in place of option in list (`optionComponent`), single value (`singleValueComponent`), multiple value (`multipleValueComponent`), pending component while waiting for Promise resolves (`pendingComponent`), failure component for Promise rejection (`failureComponent`) and last, but not least - no options component (`noOptionsComponent`).
 
-Your components that are passed to ember-select-guru must implement some simple API that is used by ember-select-guru. Check out detailed examples for this.
+Your components that are passed to ember-select-guru must implement some simple API that is used by ember-select-guru. [Check out detailed examples for this.](https://netguru.github.io/ember-select-guru/)
 
 ## Contributing and development
 Bug reports and pull requests are welcome on GitHub at https://github.com/netguru/ember-select-guru.
