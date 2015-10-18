@@ -56,7 +56,7 @@ export default Controller.extend({
     customSearchInputChange(queryTerm) {
       const options = this.get('options');
       const number = parseInt(queryTerm, 10);
-      if(queryTerm == '') {
+      if(queryTerm === '') {
         return options;
       }
       if(isNaN(number)) {

@@ -31,7 +31,7 @@ export default Component.extend({
         remoteData: false,
       });
       const result = this.attrs.onSearchInputChange && this.attrs.onSearchInputChange(this.get('queryTerm'));
-      if(result == undefined || result == null) {
+      if(result === undefined || result === null) {
         // handle if result is undefined (internal search)
         this._handleAttrsChange();
         if(!this.get('queryTerm')) { return; }
@@ -111,7 +111,7 @@ export default Component.extend({
         this.incrementProperty('currentHighlight');
         return;
       case 38:
-        if(this.get('currentHighlight') == 0) { return; }
+        if(this.get('currentHighlight') === 0) { return; }
         this.decrementProperty('currentHighlight');
         return;
       case 13:
