@@ -24,9 +24,9 @@ test('it renders options on dropdown opening', function(assert) {
     hbs('{{ember-select-guru value=value options=options onSearchInputChange=(action "queryTermChanged")}}')
   );
 
-  this.$('.value-wrapper').click();
+  this.$('.ember-select-guru__trigger').click();
 
-  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
   assert.equal(Ember.$('.options-wrapper').children().length, 3, 'dropdown should render all options');
 });
 
@@ -46,9 +46,9 @@ test('it renders proper notification when options are empty', function(assert) {
     hbs('{{ember-select-guru value=value options=options onSearchInputChange=(action "queryTermChanged")}}')
   );
 
-  this.$('.value-wrapper').click();
+  this.$('.ember-select-guru__trigger').click();
 
-  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
   assert.equal(Ember.$('.options-wrapper').children().text().trim(), 'No options.', 'dropdown should render no options notification');
 });
 
@@ -68,9 +68,9 @@ test('it renders proper notification when promise returned from query', function
     hbs('{{ember-select-guru value=value options=options onSearchInputChange=(action "queryTermChanged")}}')
   );
 
-  this.$('.value-wrapper').click();
+  this.$('.ember-select-guru__trigger').click();
 
-  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
   assert.equal(Ember.$('.options-wrapper').children().text().trim(), 'Fetching data...', 'dropdown should render fetching data notification');
 });
 
@@ -92,9 +92,9 @@ test('it renders proper notification when promise returned from query fails', fu
       hbs('{{ember-select-guru value=value options=options onSearchInputChange=(action "queryTermChanged")}}')
     );
 
-    this.$('.value-wrapper').click();
+    this.$('.ember-select-guru__trigger').click();
 
-    assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+    assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
     assert.equal(Ember.$('.options-wrapper').children().text().trim(), 'Fetching data...', 'dropdown should render fetching data notification');
 
     defer.reject();
@@ -122,9 +122,9 @@ test('it renders options when promise from returned query resolves', function(as
       hbs('{{ember-select-guru value=value options=options onSearchInputChange=(action "queryTermChanged")}}')
     );
 
-    this.$('.value-wrapper').click();
+    this.$('.ember-select-guru__trigger').click();
 
-    assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+    assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
     assert.equal(Ember.$('.options-wrapper').children().text().trim(), 'Fetching data...', 'dropdown should render fetching data notification');
 
     defer.resolve();
@@ -153,13 +153,13 @@ test('it closes the dropdown on selection', function(assert) {
     hbs('{{ember-select-guru value=value options=options onSearchInputChange=(action "queryTermChanged") onSelect=(action "onSelect")}}')
   );
 
-  this.$('.value-wrapper').click();
+  this.$('.ember-select-guru__trigger').click();
 
-  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
   assert.equal(Ember.$('.options-wrapper').children().length, 3, 'dropdown should render all options');
 
   Ember.$('.options-wrapper').children().last().click();
-  assert.equal(Ember.$('.tether-wrapper').length, 0, 'dropdown should hide');
+  assert.equal(Ember.$('.ember-select-guru__dropdown').length, 0, 'dropdown should hide');
 });
 
 test('it closes the dropdown on remove from multiple selection', function(assert) {
@@ -180,14 +180,15 @@ test('it closes the dropdown on remove from multiple selection', function(assert
     hbs('{{ember-select-guru multiple=true value=value options=options onSearchInputChange=(action "queryTermChanged") onSelect=(action "onSelect")}}')
   );
 
-  this.$('.value-wrapper').click();
+  assert.equal(Ember.$('.multi-value__selected').children('li').length, 1, 'component should render selected values');
 
-  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  this.$('.ember-select-guru__trigger').click();
+
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
   assert.equal(Ember.$('.options-wrapper').children().length, 2, 'dropdown should render possible options except selected one');
-  assert.equal(Ember.$(".multiple-value-selector").children('li').length, 1, 'dropdown should render selected values');
 
-  Ember.$(".multiple-value-selector li span").click();
-  assert.equal(Ember.$('.tether-wrapper').length, 0, 'dropdown should hide');
+  Ember.$('.multi-value__remove').click();
+  assert.equal(Ember.$('.ember-select-guru__dropdown').length, 0, 'dropdown should hide');
 });
 
 test('it sends #onSelect action with proper values set on remove value click', function(assert) {
@@ -210,14 +211,15 @@ test('it sends #onSelect action with proper values set on remove value click', f
     hbs('{{ember-select-guru multiple=true value=value options=options onSearchInputChange=(action "queryTermChanged") onSelect=(action "onSelect")}}')
   );
 
-  this.$('.value-wrapper').click();
+  assert.equal(Ember.$('.multi-value__selected').children('li').length, 2, 'component should render selected values');
 
-  assert.ok(Ember.$('.tether-wrapper').length, 'dropdown should render');
+  this.$('.ember-select-guru__trigger').click();
+
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
   assert.equal(Ember.$('.options-wrapper').children().length, 1, 'dropdown should render possible options except selected ones');
-  assert.equal(Ember.$(".multiple-value-selector").children('li').length, 2, 'dropdown should render selected values');
 
-  Ember.$(".multiple-value-selector li:first span").click();
-  assert.equal(Ember.$('.tether-wrapper').length, 0, 'dropdown should hide');
+  Ember.$('.multi-value__remove:first').click();
+  assert.equal(Ember.$('.ember-select-guru__dropdown').length, 0, 'dropdown should hide');
   assert.ok(onSelectSpy.calledOnce, '#onSelect should be called once for removed option');
   const onSelectSpyCall = onSelectSpy.getCall(0);
   assert.equal(onSelectSpyCall.args[0][0], options[1], '#onSelect should be called with one selected value');
