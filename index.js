@@ -5,6 +5,8 @@ module.exports = {
   name: 'ember-select-guru',
 
   included: function(app) {
-    app.import('vendor/ember-select-guru.css');
+    if (app.options.nativeStyles) {
+      app.import('vendor/ember-select-guru.css');
+    }
   }
 };
