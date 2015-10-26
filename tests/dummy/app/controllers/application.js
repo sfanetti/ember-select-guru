@@ -12,9 +12,6 @@ export default Controller.extend({
   names: A(names),
   multipleValue: A([]),
   actions: {
-    queryTermChanged(queryTerm) {
-      console.log(queryTerm);
-    },
     handleSingleSelect(option) {
       this.set('singleValue', option);
     },
