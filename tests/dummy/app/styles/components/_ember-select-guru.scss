@@ -3,13 +3,35 @@
 
   &:hover {
     box-shadow: 0 0 8px -6px $black;
+
+    .ember-select-guru__dropdown {
+      box-shadow: 0 4px 8px -6px $black;
+    }
   }
 
   &__trigger {
-    padding: $base;
+    padding: $base $base * 2;
     border: solid 1px $border;
     border-radius: 5px;
     cursor: pointer;
+    position: relative;
+
+    &:before,
+    &:after {
+      font-size: 8px;
+      position: absolute;
+      right: 10px;
+    }
+
+    &:before {
+      content: '\25b2';
+      top: $base;
+    }
+
+    &:after {
+      content: '\25bc';
+      bottom: $base;
+    }
   }
 
   &__search {
@@ -32,6 +54,7 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background: $white;
+    overflow: hidden;
     position: absolute;
     top: 25px;
     left: 0;

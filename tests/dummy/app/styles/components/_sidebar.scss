@@ -1,0 +1,32 @@
+.sidebar {
+  z-index: 1000;
+  position: fixed;
+  height: 100%;
+  background: $black;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+
+  h1 {
+    margin: $base * 5 - 3 0 $base * 5 0;
+    color: $white;
+    font-size: 24px;
+  }
+
+  li {
+    line-height: 40px;
+  }
+
+  a {
+    padding: 0 $base * 3;
+    display: block;
+    text-decoration: none;
+    color: $nav-link;
+
+    &:hover {
+      color: $white;
+      background: rgba($white, .2);
+    }
+  }
+}
