@@ -25,9 +25,13 @@ export default Controller.extend({
       this.set('multipleValue', options);
     },
     remoteQueryTermChanged(queryTerm) {
-      return this.store.query('user', { q: queryTerm }).then((result) => {
-        this.set('remoteOptions', result.toArray());
-      });
+      let defer = Ember.RSVP.defer();
+      Ember.run.later(this, function() {
+        const results = this._searchForUsers(queryTerm);
+        this.set('remoteOptions', results);
+        defer.resolve();
+      }, 500);
+      return defer.promise;
     },
     handleRemoteSelect(option) {
       this.set('remoteValue', option);
@@ -45,5 +49,10 @@ export default Controller.extend({
         return parseInt(item.get('name'), 10) > number;
       });
     }
+  },
+  _searchForUsers(query) {
+    return this.get('names').filter((item) => {
+      return (Ember.get(item, 'name') && (Ember.get(item, 'name').indexOf(query) > -1));
+    });
   }
 });
