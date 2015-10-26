@@ -7,10 +7,10 @@ import numbers from 'dummy/example-constants/numbers';
 const { Controller, get, A, RSVP, run } = Ember;
 
 export default Controller.extend({
-  options: A(numbers),
-  colorOptions: A(colors),
-  names: A(names),
-  multipleValue: A([]),
+  options: new A(numbers),
+  colorOptions: new A(colors),
+  names: new A(names),
+  multipleValue: new A([]),
   actions: {
     handleSingleSelect(option) {
       this.set('singleValue', option);
@@ -40,7 +40,7 @@ export default Controller.extend({
         return options;
       }
       if(isNaN(number)) {
-        return A();
+        return new A();
       }
       return options.filter((item) => {
         return parseInt(item.get('name'), 10) > number;
