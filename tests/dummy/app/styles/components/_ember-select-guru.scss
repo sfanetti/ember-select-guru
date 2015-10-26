@@ -1,18 +1,21 @@
 .ember-select-guru {
   position: relative;
+  min-height: $base * 7;
 
-  &:hover {
-    box-shadow: 0 0 8px -6px $black;
+  &__container {
+    width: 100%;
+    border: solid 1px $border;
+    border-radius: 5px;
+    overflow: hidden;
+    position: absolute;
 
-    .ember-select-guru__dropdown {
-      box-shadow: 0 4px 8px -6px $black;
+    &:hover {
+      box-shadow: 0 0 8px -6px $black;
     }
   }
 
   &__trigger {
     padding: $base $base * 2;
-    border: solid 1px $border;
-    border-radius: 5px;
     cursor: pointer;
     position: relative;
 
@@ -37,7 +40,7 @@
   &__search {
 
     &-wrapper {
-      padding: $base $base * 2;
+      padding: 0 $base * 2 $base;
     }
 
     box-sizing: border-box;
@@ -48,17 +51,9 @@
 
   &__dropdown {
     width: 100%;
-    border-style: solid;
-    border-width: 0 1px 1px;
-    border-color: $border;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    box-sizing: border-box;
     background: $white;
     overflow: hidden;
-    position: absolute;
-    top: 25px;
-    left: 0;
-    z-index: 1;
   }
 
   &__option {

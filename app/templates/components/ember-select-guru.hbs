@@ -1,36 +1,38 @@
-<div class="ember-select-guru__trigger" {{action "expandComponent"}}>
-  {{#if hasValue}}
-    {{#if multiple}}
-      <ul class='multi-value__selected'>
-        {{#each value as |selectedValue|}}
-          {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
-        {{/each}}
-      </ul>
+<div class='ember-select-guru__container'>
+  <div class="ember-select-guru__trigger" {{action "expandComponent"}}>
+    {{#if hasValue}}
+      {{#if multiple}}
+        <ul class='multi-value__selected'>
+          {{#each value as |selectedValue|}}
+            {{component multiValueComponent value=selectedValue onRemoveClick="onRemoveValueClick"}}
+          {{/each}}
+        </ul>
+      {{else}}
+        {{component singleValueComponent value=value}}
+      {{/if}}
     {{else}}
-      {{component singleValueComponent value=value}}
+      {{placeholder}}
     {{/if}}
-  {{else}}
-    {{placeholder}}
+  </div>
+
+  {{#if isExpanded}}
+    {{#ember-select-dropdown name=name visible=isExpanded willHideDropdown="willHideDropdown" as |optionsList|}}
+      <div class='ember-select-guru__search-wrapper'>
+        {{input placeholder=searchPlaceholder value=queryTerm class='ember-select-guru__search'}}
+      </div>
+      <div class="options-wrapper">
+        {{#if isPending}}
+          {{component pendingComponent}}
+        {{else}} {{#if hasFailed}}
+          {{component failureComponent}}
+        {{else}} {{#if hasOptions}}
+          {{#each _options as |option index|}}
+            {{component optionComponent option=option onClick=(action "onOptionClick") currentHighlight=currentHighlight index=index}}
+          {{/each}}
+        {{else}}
+          {{component noOptionsComponent}}
+        {{/if}}{{/if}}{{/if}}
+      </div>
+    {{/ember-select-dropdown}}
   {{/if}}
 </div>
-
-{{#if isExpanded}}
-  {{#ember-select-dropdown name=name visible=isExpanded willHideDropdown="willHideDropdown" as |optionsList|}}
-    <div class='ember-select-guru__search-wrapper'>
-      {{input placeholder=searchPlaceholder value=queryTerm class='ember-select-guru__search'}}
-    </div>
-    <div class="options-wrapper">
-      {{#if isPending}}
-        {{component pendingComponent}}
-      {{else}} {{#if hasFailed}}
-        {{component failureComponent}}
-      {{else}} {{#if hasOptions}}
-        {{#each _options as |option index|}}
-          {{component optionComponent option=option onClick=(action "onOptionClick") currentHighlight=currentHighlight index=index}}
-        {{/each}}
-      {{else}}
-        {{component noOptionsComponent}}
-      {{/if}}{{/if}}{{/if}}
-    </div>
-  {{/ember-select-dropdown}}
-{{/if}}
