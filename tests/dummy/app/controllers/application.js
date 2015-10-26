@@ -1,36 +1,15 @@
 import Ember from 'ember';
 
+import names from 'dummy/example-constants/names';
+import colors from 'dummy/example-constants/colors';
+import numbers from 'dummy/example-constants/numbers';
+
 const { Controller } = Ember;
 
 export default Controller.extend({
-  options: Ember.A([
-    Ember.Object.create({
-      name: '123',
-      description: 'one hundred twenty-three'
-    }),
-    Ember.Object.create({
-      name: '456',
-      description: 'four hundred fifty-six'
-    }),
-    Ember.Object.create({
-      name: '758',
-      description: 'seven hundred fifty-eight'
-    }),
-  ]),
-  colorOptions: Ember.A([
-    Ember.Object.create({
-      name: 'red',
-      color: '#f00'
-    }),
-    Ember.Object.create({
-      name: 'green',
-      color: '#0f0'
-    }),
-    Ember.Object.create({
-      name: 'blue',
-      color: '#00f'
-    })
-  ]),
+  options: Ember.A(numbers),
+  colorOptions: Ember.A(colors),
+  names: Ember.A(names),
   multipleValue: Ember.A([]),
   actions: {
     queryTermChanged(queryTerm) {
