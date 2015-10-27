@@ -117,8 +117,8 @@ Due to fact that ember-select-guru is natively developed in Emberjs, it is const
 
 Your components that are passed to ember-select-guru must implement some simple API that is used by ember-select-guru. [Check out detailed examples for this.](https://netguru.github.io/ember-select-guru/)
 
-## Configuration
-There are native styles included in this addon but you can switch them off by changing `nativeStyles` to `false` in the `ember-cli-build.js` file.
+## Vendored Stylesheets
+There are vendored stylesheets included in this addon but you can switch them off by changing `includeCss` to `false` in the `ember-cli-build.js` file.
 
 ```js
 // ember-cli-build.js
@@ -127,11 +127,10 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    nativeStyles: false
+    emberSelectGuru: {
+      includeCss: false
+    }
   });
-
-  // load sinon for test spies
-  app.import('bower_components/sinon/index.js');
 
   return app.toTree();
 };

@@ -3,7 +3,9 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    nativeStyles: true
+    emberSelectGuru: {
+      includeCss: true
+    }
   });
 
   // load sinon for test spies

@@ -1,61 +1,90 @@
 .ember-select-guru {
-  position: relative;
+    position: relative;
+    min-height: 35px;
+    z-index: 9000;
 }
-.ember-select-guru:hover {
-  box-shadow: 0 0 8px -6px #000;
+
+.ember-select-guru__container {
+    width: 100%;
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    overflow: hidden;
+    position: absolute;
 }
+
+.ember-select-guru__container:hover {
+    box-shadow: 0 0 8px -6px #000;
+}
+
 .ember-select-guru__trigger {
-  padding: 5px;
-  border: solid 1px #cdcdcd;
-  border-radius: 5px;
-  cursor: pointer;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
 }
+
+.ember-select-guru__trigger:before,
+    .ember-select-guru__trigger:after {
+    font-size: 8px;
+    position: absolute;
+    right: 10px;
+}
+
+.ember-select-guru__trigger:before {
+    content: '\25b2';
+    top: 5px;
+}
+
+.ember-select-guru__trigger:after {
+    content: '\25bc';
+    bottom: 5px;
+}
+
 .ember-select-guru__search {
-  box-sizing: border-box;
-  padding: 5px;
-  width: 100%;
-  border: solid 1px #cdcdcd;
+    box-sizing: border-box;
+    padding: 5px;
+    width: 100%;
+    border: solid 1px #cdcdcd;
 }
+
 .ember-select-guru__search-wrapper {
-  padding: 5px 10px;
+    padding: 0 10px 5px;
 }
+
 .ember-select-guru__dropdown {
-  width: 100%;
-  border-style: solid;
-  border-width: 0 1px 1px;
-  border-color: #cdcdcd;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background: #fff;
-  position: absolute;
-  top: 25px;
-  left: 0;
-  z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    overflow: hidden;
 }
+
 .ember-select-guru__option {
-  padding: 5px 10px 2px;
-  cursor: pointer;
+    padding: 5px 10px 2px;
+    cursor: pointer;
 }
+
 .ember-select-guru__option:hover {
-  background: #f8f8f8;
+    background: #f8f8f8;
 }
+
 .ember-select-guru__option.is-active {
-  background: #f1efef;
+    background: #f1efef;
 }
 
 .multi-value__option {
-  display: inline-block;
-  margin-bottom: 3px;
-  padding: 3.5px 5px 1px 5px;
-  border-radius: 5px;
-  border: solid 1px #cdcdcd;
-  background: #f2f2f2;
+    display: inline-block;
+    margin-bottom: 3px;
+    padding: 3.5px 5px 1px 5px;
+    border-radius: 5px;
+    border: solid 1px #cdcdcd;
+    background: #f2f2f2;
 }
+
 .multi-value__selected {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 .multi-value__remove:hover {
-  color: #d30000;
+    color: #d30000;
 }

@@ -19,9 +19,11 @@
         <li>
           <a href="#search-array">Custom search</a>
         </li>
-
         <li>
           <a href="#components">Customizing components</a>
+        </li>
+        <li>
+          <a href="#stylesheets">Vendored stylesheets</a>
         </li>
       </ul>
     </div>
@@ -243,6 +245,31 @@
               onSelect=(action "handleColorSelect")}}
           {{/ember-highlight-code}}
           <p>However, you must apply to the original components simple API. <a href="https://github.com/netguru/ember-select-guru/tree/master/addon/components">Take a look at their implementation in components folder to see what is needed.</a></p>
+        </div>
+      </div>
+      <div class="row" id="stylesheets">
+        <div class="col-md-12">
+          <h2>Vendored stylesheets</h2>
+        </div>
+        <div class="col-md-4">
+          <p>
+            There are vendored stylesheets included in this addon but you can switch them off by setting <code>includeCss</code> to <code>false</code> in the <code>ember-cli-build.js</code> file.
+          </p>
+        </div>
+        <div class="col-md-8">
+          {{#ember-highlight-code language="javascript"}}
+            var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+            module.exports = function(defaults) {
+              var app = new EmberApp(defaults, {
+                <strong>emberSelectGuru: {
+                  includeCss: false
+                }</strong>
+              });
+
+              return app.toTree();
+            };
+          {{/ember-highlight-code}}
         </div>
       </div>
     </div>
