@@ -1,6 +1,7 @@
 .ember-select-guru {
   position: relative;
   min-height: $base * 7;
+  z-index: 9000;
 
   &__container {
     width: 100%;
