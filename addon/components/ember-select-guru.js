@@ -116,7 +116,7 @@ export default Component.extend({
         return;
       case 13:
         const option = this.get('_options')[this.get('currentHighlight')];
-        this.send('onOptionClick', option);
+        if(option) { this.send('onOptionClick', option); }
         this.set('isExpanded', false);
         return;
       default:

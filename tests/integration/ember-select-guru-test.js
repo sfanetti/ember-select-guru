@@ -272,3 +272,32 @@ test('it let\'s control component by keyboard', function(assert) {
   assert.equal(Ember.$('.ember-select-guru__dropdown').length, 0, 'dropdown should hide');
 });
 
+test('it don\'t sends onSelect when ENTER clicked with empty options', function(assert) {
+  assert.expect(3);
+
+  const options = [];
+
+  this.setProperties({
+    options,
+    actions: {}
+  });
+
+  this.set('actions.onSelect', (value) => { this.set('value', value); });
+
+  const onSelectSpy = sinon.spy(this.get('actions'), 'onSelect');
+
+  this.render(
+    hbs('{{ember-select-guru value=value options=options onSelect=(action "onSelect")}}')
+  );
+  this.$('.ember-select-guru__trigger').click();
+
+  assert.ok(Ember.$('.ember-select-guru__dropdown').length, 'dropdown should render');
+
+  let event = Ember.$.Event('keydown');
+  event.keyCode = 13;
+  this.$('.ember-select-guru').trigger(event);
+
+  assert.equal(Ember.$('.ember-select-guru__dropdown').length, 0, 'dropdown should hide');
+  assert.equal(onSelectSpy.called, false, '#onSelect should not be called at all');
+});
+
