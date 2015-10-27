@@ -7,6 +7,7 @@
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  width: $sidebar-width;
 
   h1 {
     margin: $base * 5 - 3 0 $base * 5 0;
@@ -28,5 +29,13 @@
       color: $white;
       background: rgba($white, .2);
     }
+  }
+
+  &-brand {
+    text-align: center;
+  }
+
+  @media(max-width:767px) {
+    margin-left: -$sidebar-width;
   }
 }
