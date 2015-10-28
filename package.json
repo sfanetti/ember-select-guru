@@ -1,7 +1,7 @@
 {
   "name": "ember-select-guru",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "1.0.0",
+  "description": "Native emberjs select component inspired by Select2. Features include single, multiple, remote selection and others.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,18 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://netguru.github.io/ember-select-guru/",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Jakub Niechcial",
+  "contributors": [
+    "Dominik Stodolny",
+    "Krzysztof Urban",
+    "Lukasz Johanowicz",
+    "Mateusz Czerwinski",
+    "Michal Hartwich"
+  ],
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.1.2",
@@ -41,7 +48,9 @@
     "ember-try": "0.0.6"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "select",
+    "select2"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.3",
