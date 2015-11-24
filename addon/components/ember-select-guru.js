@@ -1,7 +1,7 @@
 import Ember from 'ember';
+import ArrayUtils from 'ember-select-guru/utils/array-utils';
 
-import intersection from 'npm:lodash/array/intersection';
-import difference from 'npm:lodash/array/difference';
+const { intersection, difference } = ArrayUtils;
 
 const { Component, computed, observer, get, run } = Ember;
 
