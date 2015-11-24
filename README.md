@@ -9,15 +9,11 @@ ember-select-guru main advantage over other Select2 wrappers is it's native impl
 ember-select-guru is shipped as ember-cli addon and can be easily installed using:
 ```
 npm install ember-select-guru --save-dev
-npm install ember-browserify --save-dev
 ```
 or
 ```
 ember install ember-select-guru
-ember install ember-browserify
 ```
-
-We use [ember-browserify](https://github.com/ef4/ember-browserify) to take advantage of [lodash](https://github.com/lodash/lodash). If using `ember-browserify` may be a problem for you, give us a sign opening new issue.
 
 ## Usage
 ember-select-guru currently supports following use cases:
