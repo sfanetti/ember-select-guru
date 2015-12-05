@@ -135,11 +135,11 @@ export default Component.extend({
     this.set('_options', possibleOptions);
   },
   _searchForOptions() {
-    const term = this.get('queryTerm');
+    const term = this.get('queryTerm').toLowerCase();
     const searchKey = this.get('searchKey');
 
     return this.get('_options').filter((item) => {
-      return (get(item, searchKey) && (get(item, searchKey).indexOf(term) > -1));
+      return (get(item, searchKey) && (get(item, searchKey).toLowerCase().indexOf(term) > -1));
     });
   }
 });

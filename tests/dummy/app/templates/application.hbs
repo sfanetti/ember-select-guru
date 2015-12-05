@@ -140,7 +140,7 @@
           <h2><code>searchKey</code> property</h2>
         </div>
         <div class="col-md-4">
-          <p>You can easily change the attribute used for searching. Try typing "fifty" into the field below.</p>
+          <p><b>ember-select-guru</b> is searching through <code>name</code> property in <b>case-insensitive</b> way by default. You can easily change the attribute used for searching. Try typing "fifty" into the field below.</p>
 
           {{ember-select-guru
           value=singleValue
@@ -175,7 +175,8 @@
               options=options
               <strong>searchKey='description'</strong>
               onSelect=(action "onSelectEvent")}}
-          {{/ember-highlight-code}}
+            {{/ember-highlight-code}}
+          <p>But if you want to search in case-sensitive or any other way, check out following <b>custom search</b> section.</p>
         </div>
       </div>
       <hr>

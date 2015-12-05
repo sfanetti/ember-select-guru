@@ -49,7 +49,7 @@ export default Controller.extend({
   },
   _searchForUsers(query) {
     return this.get('names').filter((item) => {
-      return (get(item, 'name') && (get(item, 'name').indexOf(query) > -1));
+      return (get(item, 'name') && (get(item, 'name').toLowerCase().indexOf(query.toLowerCase()) > -1));
     });
   }
 });
