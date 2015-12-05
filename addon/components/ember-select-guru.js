@@ -21,6 +21,7 @@ export default Component.extend({
   multiValueComponent: 'multi-value-component',
   searchKey: 'name',
   classNames: 'ember-select-guru',
+  classNameBindings: ['isExpanded:ember-select-guru__expanded'],
   hasOptions: computed.notEmpty('_options'),
   hasValue: computed.notEmpty('value'),
   queryTermObserver: observer('queryTerm', function() {

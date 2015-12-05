@@ -70,6 +70,10 @@
     background: #f1efef;
 }
 
+.ember-select-guru__expanded {
+    z-index: 9999;
+}
+
 .multi-value__option {
     display: inline-block;
     margin-bottom: 3px;
