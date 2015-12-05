@@ -69,4 +69,8 @@
       background: $active;
     }
   }
+
+  &__expanded {
+    z-index: 9999;
+  }
 }
