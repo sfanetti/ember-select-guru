@@ -82,7 +82,7 @@ actions: {
 If you would like to have multiple options with remote data fetching, all you need to do is to return a Promise as in single selection mode.
 
 ### <a name="search"></a>Custom search
-By default, ember-select-guru will perform searching through objects available in `options` binding by default key `searchKey` set to `name`. If your objects should be searched using different key, you can easily set it to other one:
+By default, ember-select-guru will perform case-insensitive searching through objects available in `options` binding by default key `searchKey` set to `name`. If your objects should be searched using different key, you can easily set it to other one:
 ```
 {{ember-select-guru
   value=value
