@@ -1,6 +1,6 @@
 {
   "name": "ember-select-guru",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Native emberjs select component inspired by Select2. Features include single, multiple, remote selection and others.",
   "directories": {
     "doc": "doc",
