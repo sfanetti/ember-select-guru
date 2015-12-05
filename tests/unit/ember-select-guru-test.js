@@ -26,7 +26,7 @@ test('query change executes #onSearchInputChange action', function(assert) {
   assert.ok(onSearchInputChangeSpy.calledWith('New value'), '#onSearchInputChange should be executed with proper query term');
 });
 
-test('if #onSearchInputChange returns null, it sets filtered options except currently selected', function(assert) {
+test('if #onSearchInputChange returns null, it sets filtered options except currently selected case-insensitive', function(assert) {
   assert.expect(3);
 
   let component = this.subject();
@@ -42,7 +42,7 @@ test('if #onSearchInputChange returns null, it sets filtered options except curr
 
   run(() => {
     component.set('value', options[0]);
-    component.set('queryTerm', 'ABC');
+    component.set('queryTerm', 'abc');
   });
 
   assert.equal(component.get('_options.length'), 2, '_options should contain two elements');
