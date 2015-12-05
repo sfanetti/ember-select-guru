@@ -1,0 +1,202 @@
+.ember-select-guru {
+    position: relative;
+    min-height: 35px;
+    z-index: 9000;
+}
+
+.ember-select-guru__container {
+    width: 100%;
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.ember-select-guru__container:hover {
+    box-shadow: 0 0 8px -6px #000;
+}
+
+.ember-select-guru__trigger {
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.ember-select-guru__trigger:before,
+    .ember-select-guru__trigger:after {
+    font-size: 8px;
+    position: absolute;
+    right: 10px;
+}
+
+.ember-select-guru__trigger:before {
+    content: '\25b2';
+    top: 5px;
+}
+
+.ember-select-guru__trigger:after {
+    content: '\25bc';
+    bottom: 5px;
+}
+
+.ember-select-guru__search {
+    box-sizing: border-box;
+    padding: 5px;
+    width: 100%;
+    border: solid 1px #cdcdcd;
+}
+
+.ember-select-guru__search-wrapper {
+    padding: 0 10px 5px;
+}
+
+.ember-select-guru__dropdown {
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    overflow: hidden;
+}
+
+.ember-select-guru__option {
+    padding: 5px 10px 2px;
+    cursor: pointer;
+}
+
+.ember-select-guru__option:hover {
+    background: #f8f8f8;
+}
+
+.ember-select-guru__option.is-active {
+    background: #f1efef;
+}
+
+.ember-select-guru__expanded {
+    z-index: 9999;
+}
+
+.multi-value__option {
+    display: inline-block;
+    margin-bottom: 3px;
+    padding: 3.5px 5px 1px 5px;
+    border-radius: 5px;
+    border: solid 1px #cdcdcd;
+    background: #f2f2f2;
+}
+
+.multi-value__selected {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.multi-value__remove:hover {
+    color: #d30000;
+}
+
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+
+/* Tomorrow Comment */
+.hljs-comment {
+  color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-regexp,
+.ruby .hljs-constant,
+.xml .hljs-tag .hljs-title,
+.xml .hljs-pi,
+.xml .hljs-doctype,
+.html .hljs-doctype,
+.css .hljs-id,
+.css .hljs-class,
+.css .hljs-pseudo {
+  color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-preprocessor,
+.hljs-pragma,
+.hljs-built_in,
+.hljs-literal,
+.hljs-params,
+.hljs-constant {
+  color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.ruby .hljs-class .hljs-title,
+.css .hljs-rule .hljs-attribute {
+  color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-value,
+.hljs-inheritance,
+.hljs-header,
+.hljs-name,
+.ruby .hljs-symbol,
+.xml .hljs-cdata {
+  color: #718c00;
+}
+
+/* Tomorrow Aqua */
+.hljs-title,
+.css .hljs-hexcolor {
+  color: #3e999f;
+}
+
+/* Tomorrow Blue */
+.hljs-function,
+.python .hljs-decorator,
+.python .hljs-title,
+.ruby .hljs-function .hljs-title,
+.ruby .hljs-title .hljs-keyword,
+.perl .hljs-sub,
+.javascript .hljs-title,
+.coffeescript .hljs-title {
+  color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.javascript .hljs-function {
+  color: #8959a8;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: white;
+  color: #4d4d4c;
+  padding: 0.5em;
+  -webkit-text-size-adjust: none;
+}
+
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.5;
+}
+
+pre.ember-highlight-code.ember-hightlight-code-w-line-numbers {
+  padding-left: 57px;
+}
+pre.ember-highlight-code > span.line-number {
+  position: absolute;
+  width: 47px;
+  text-align: right;
+  border-right: 1px solid #ddd;
+  margin: 0px 0px 0px -55px;
+  padding: 0px 5px 0px 0px;
+  color: #aaa;
+}
+
