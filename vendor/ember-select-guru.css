@@ -92,3 +92,7 @@
 .multi-value__remove:hover {
     color: #d30000;
 }
+
+.multi-value__remove:after {
+    content: "\00d7"
+}
