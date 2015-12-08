@@ -12,13 +12,11 @@ export default Component.extend({
   queryTerm: null,
   multiple: false,
 
-  // for localed labels set these parameters on ember-select-guru
   searchPlaceholder: 'Type to search...',
   placeholder: 'Click to select...',
   noOptionsLabel: 'No options',
   failureLabel: 'Something went wrong...',
   pendingLabel: 'Fetching data...',
-
   localeDefinitions: {},
 
   pendingComponent: 'pending-component',
@@ -68,6 +66,20 @@ export default Component.extend({
       this._handleAttrsChange();
     });
   }),
+
+  localeObserver: observer('localeDefinitions', function () {
+    Ember.run.once(() => {
+      var definitions = this.get('localeDefinitions');
+      if (definitions){
+        for(var prop in definitions) {
+          if (definitions.hasOwnProperty(prop)){
+            this.set(prop, definitions[prop]);
+          }
+        }
+      }
+    });
+  }),
+
   actions: {
     onOptionClick(option) {
       if(this.get('multiple')) {
@@ -100,16 +112,6 @@ export default Component.extend({
     this._handleAttrsChange();
     this.set('attachTo', `#${this.get('elementId')}`);
     this.set('name', `select-guru-${this.get('elementId')}`);
-
-    // Locale definitions take a POJO of key value pairs
-    if (this.get('localeDefinitions')){
-        var definitions = this.get('localeDefinitions');
-        for(var prop in definitions) {
-            if (definitions.hasOwnProperty(prop)){
-                this.set(prop, definitions[prop]);
-            }
-        }
-    }
   },
   didInsertElement() {
     this.$().bind('keydown', Ember.run.bind(this, this._handleKeyDown));
