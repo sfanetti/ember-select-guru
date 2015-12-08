@@ -1,1 +1,5 @@
-<div class='ember-select-guru__option'>No options.</div>
+{{#if value}}
+    <div class='ember-select-guru__option'>{{value}}</div>
+{{else}}
+    <div class='ember-select-guru__option'>No options.</div>
+{{/if}}
